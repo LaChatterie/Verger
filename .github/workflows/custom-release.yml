@@ -1,4 +1,4 @@
-name: Release
+name: Custom Release
 
 on:
   workflow_dispatch:
@@ -7,6 +7,10 @@ on:
         description: 'Release tag (e.g. v1.0.0)'
         required: true
         default: 'v1.0.0'
+      config_path:
+        description: 'Path to custom configuration file (relative to repo root)'
+        required: false
+        default: 'custom-config.json'
   push:
     tags:
       - v*.*.*
@@ -16,8 +20,8 @@ permissions:
 
 jobs:
   release:
-    # Only run on the original repository, not on forks
-    if: github.repository_owner == 'CherryHQ'
+    # Only run on your fork, not on the original repository
+    if: github.repository_owner != 'CherryHQ'
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -68,6 +72,12 @@ jobs:
 
       - name: Install Dependencies
         run: yarn install
+
+      # Apply custom configuration
+      - name: Apply custom configuration
+        run: node scripts/apply-custom-config.js
+        env:
+          CUSTOM_CONFIG_PATH: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.config_path || 'custom-config.json' }}
 
       - name: Build Linux
         if: matrix.os == 'ubuntu-latest'

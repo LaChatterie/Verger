@@ -132,6 +132,7 @@ import YiModelLogoDark from '@renderer/assets/images/models/yi_dark.png'
 import { getProviderByModel } from '@renderer/services/AssistantService'
 import WebSearchService from '@renderer/services/WebSearchService'
 import { Assistant, Model } from '@renderer/types'
+import { getCustomEnvConfig } from '@renderer/utils/custom-env'
 import OpenAI from 'openai'
 
 import { WEB_SEARCH_PROMPT_FOR_OPENROUTER } from './prompts'
@@ -374,7 +375,8 @@ export function getModelLogo(modelId: string) {
   return undefined
 }
 
-export const SYSTEM_MODELS: Record<string, Model[]> = {
+// Original system models definition
+const DEFAULT_SYSTEM_MODELS: Record<string, Model[]> = {
   aihubmix: [
     {
       id: 'gpt-4o',
@@ -2466,3 +2468,6 @@ export function groupQwenModels(models: Model[]): Record<string, Model[]> {
     {} as Record<string, Model[]>
   )
 }
+
+// Export with potential override from environment variables
+export const SYSTEM_MODELS = getCustomEnvConfig('SYSTEM_MODELS', DEFAULT_SYSTEM_MODELS)

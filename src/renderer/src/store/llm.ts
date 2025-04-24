@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { isLocalAi } from '@renderer/config/env'
 import { SYSTEM_MODELS } from '@renderer/config/models'
 import { Model, Provider } from '@renderer/types'
+import { getCustomEnvConfig, getCustomModelConfig, mergeCustomEnvConfig } from '@renderer/utils/custom-env'
 import { IpcChannel } from '@shared/IpcChannel'
 import { uniqBy } from 'lodash'
 
@@ -25,7 +26,8 @@ export interface LlmState {
   settings: LlmSettings
 }
 
-export const INITIAL_PROVIDERS: Provider[] = [
+// Original providers definition
+const DEFAULT_INITIAL_PROVIDERS: Provider[] = [
   {
     id: 'silicon',
     name: 'Silicon',
@@ -480,7 +482,11 @@ export const INITIAL_PROVIDERS: Provider[] = [
   }
 ]
 
-const initialState: LlmState = {
+// Export with potential override from environment variables
+export const INITIAL_PROVIDERS = getCustomEnvConfig('INITIAL_PROVIDERS', DEFAULT_INITIAL_PROVIDERS)
+
+// Original initial state definition
+const DEFAULT_INITIAL_STATE: LlmState = {
   defaultModel: SYSTEM_MODELS.silicon[1],
   topicNamingModel: SYSTEM_MODELS.silicon[2],
   translateModel: SYSTEM_MODELS.silicon[3],
@@ -497,6 +503,19 @@ const initialState: LlmState = {
     }
   }
 }
+
+// Override specific models if environment variables are set
+const modelOverrides = {
+  defaultModel: getCustomModelConfig('DEFAULT_MODEL', DEFAULT_INITIAL_STATE.defaultModel),
+  topicNamingModel: getCustomModelConfig('TOPIC_NAMING_MODEL', DEFAULT_INITIAL_STATE.topicNamingModel),
+  translateModel: getCustomModelConfig('TRANSLATE_MODEL', DEFAULT_INITIAL_STATE.translateModel)
+}
+
+// Export with potential override from environment variables
+const initialState: LlmState = mergeCustomEnvConfig('INITIAL_STATE', {
+  ...DEFAULT_INITIAL_STATE,
+  ...modelOverrides
+})
 
 const getIntegratedInitialState = () => {
   const model = JSON.parse(import.meta.env.VITE_RENDERER_INTEGRATED_MODEL)

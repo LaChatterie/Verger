@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { TRANSLATE_PROMPT } from '@renderer/config/prompts'
 import { CodeStyleVarious, LanguageVarious, MathEngine, ThemeMode, TranslateLanguageVarious } from '@renderer/types'
+import { getCustomEnvConfig } from '@renderer/utils/custom-env'
 import { IpcChannel } from '@shared/IpcChannel'
 
 import { WebDAVSyncState } from './backup'
@@ -130,7 +131,8 @@ export interface SettingsState {
 
 export type MultiModelMessageStyle = 'horizontal' | 'vertical' | 'fold' | 'grid'
 
-export const initialState: SettingsState = {
+// Original initial state definition
+const DEFAULT_INITIAL_STATE: SettingsState = {
   showAssistants: true,
   showTopics: true,
   sendMessageShortcut: 'Enter',
@@ -228,6 +230,9 @@ export const initialState: SettingsState = {
     docx: true
   }
 }
+
+// Export with potential override from environment variables
+export const initialState: SettingsState = getCustomEnvConfig('SETTINGS', DEFAULT_INITIAL_STATE)
 
 const settingsSlice = createSlice({
   name: 'settings',
