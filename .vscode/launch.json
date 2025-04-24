@@ -1,4 +1,10 @@
 {
+  // Cherry Studio Debugging Configuration
+  // To debug the application:
+  // 1. Press F5 to start the Main Process debugging
+  // 2. The application will start in development mode
+  // 3. Use the built-in DevTools (Ctrl+Shift+I) for renderer debugging
+  // 4. This approach avoids opening additional browser windows
   "version": "0.2.0",
   "configurations": [
     {
@@ -6,34 +12,17 @@
       "type": "node",
       "request": "launch",
       "cwd": "${workspaceRoot}",
-      "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron-vite",
+      "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron",
       "windows": {
-        "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron-vite.cmd"
+        "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron.cmd"
       },
-      "runtimeArgs": ["--sourcemap"],
+      "args": ["."],
       "env": {
-        "REMOTE_DEBUGGING_PORT": "9222"
-      }
-    },
-    {
-      "name": "Debug Renderer Process",
-      "port": 9222,
-      "request": "attach",
-      "type": "chrome",
-      "webRoot": "${workspaceFolder}/src/renderer",
-      "timeout": 60000,
-      "presentation": {
-        "hidden": true
-      }
-    }
-  ],
-  "compounds": [
-    {
-      "name": "Debug All",
-      "configurations": ["Debug Main Process", "Debug Renderer Process"],
-      "presentation": {
-        "order": 1
-      }
+        "PATH": "C:\\Program Files\\nodejs20;${env:PATH}"
+      },
+      "preLaunchTask": "Start Dev Server",
+      "outputCapture": "std",
+      "console": "integratedTerminal"
     }
   ]
 }

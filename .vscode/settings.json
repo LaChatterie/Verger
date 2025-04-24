@@ -39,5 +39,18 @@
   "i18n-ally.enabledParsers": ["ts", "js", "json"], // 解析语言
   "i18n-ally.sourceLanguage": "en-us", // 翻译源语言
   "i18n-ally.displayLanguage": "zh-cn",
-  "i18n-ally.fullReloadOnChanged": true // 界面显示语言
+  "i18n-ally.fullReloadOnChanged": true, // 界面显示语言
+
+  // Node.js 20 configuration
+  "terminal.integrated.env.windows": {
+    "PATH": "C:\\Program Files\\nodejs20;${env:PATH}"
+  },
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "terminal.integrated.profiles.windows": {
+    "PowerShell": {
+      "source": "PowerShell",
+      "icon": "terminal-powershell",
+      "args": ["-NoExit", "-Command", "$env:PATH = 'C:\\Program Files\\nodejs20;' + $env:PATH; node --version"]
+    }
+  }
 }
