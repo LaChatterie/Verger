@@ -2,10 +2,10 @@
   "name": "Verger",
   "version": "1.0.0",
   "private": true,
-  "description": "A customized AI assistant based on Cherry Studio.",
+  "description": "A multi-model customizable AI chat assistant.",
   "main": "./out/main/index.js",
-  "author": "Your Name <your.email@example.com>",
-  "homepage": "https://github.com/yourusername/verger",
+  "author": "Vergerier",
+  "homepage": "https://github.com/cmbant/AI-verger",
   "workspaces": {
     "packages": [
       "local",

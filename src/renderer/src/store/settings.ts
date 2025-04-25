@@ -176,7 +176,7 @@ const DEFAULT_INITIAL_STATE: SettingsState = {
   webdavHost: '',
   webdavUser: '',
   webdavPass: '',
-  webdavPath: '/cherry-studio',
+  webdavPath: '/verger',
   webdavAutoSync: false,
   webdavSyncInterval: 0,
   webdavMaxBackups: 0,
