@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { TRANSLATE_PROMPT } from '@renderer/config/prompts'
 import { CodeStyleVarious, LanguageVarious, MathEngine, ThemeMode, TranslateLanguageVarious } from '@renderer/types'
-import { getCustomConfig } from '@renderer/utils/custom-config'
+import { CUSTOM_SETTINGS, CUSTOM_TOPIC_NAMING_PROMPT } from '@renderer/config/custom-config'
 import { IpcChannel } from '@shared/IpcChannel'
 
 import { WebDAVSyncState } from './backup'
@@ -232,7 +232,12 @@ const DEFAULT_INITIAL_STATE: SettingsState = {
 }
 
 // Export with potential override from custom configuration
-export const initialState: SettingsState = getCustomConfig('SETTINGS', DEFAULT_INITIAL_STATE)
+export const initialState: SettingsState = CUSTOM_SETTINGS || DEFAULT_INITIAL_STATE
+
+// Apply custom topic naming prompt if available
+if (CUSTOM_TOPIC_NAMING_PROMPT && !initialState.topicNamingPrompt) {
+  initialState.topicNamingPrompt = CUSTOM_TOPIC_NAMING_PROMPT
+}
 
 const settingsSlice = createSlice({
   name: 'settings',

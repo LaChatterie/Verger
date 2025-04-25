@@ -1,8 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { isLocalAi } from '@renderer/config/env'
+import {
+  CUSTOM_DEFAULT_MODEL,
+  CUSTOM_INITIAL_PROVIDERS,
+  CUSTOM_TOPIC_NAMING_MODEL,
+  CUSTOM_TRANSLATE_MODEL
+} from '@renderer/config/custom-config'
 import { SYSTEM_MODELS } from '@renderer/config/models'
 import { Model, Provider } from '@renderer/types'
-import { getCustomConfig } from '@renderer/utils/custom-config'
 import { IpcChannel } from '@shared/IpcChannel'
 import { uniqBy } from 'lodash'
 
@@ -483,7 +488,7 @@ const DEFAULT_INITIAL_PROVIDERS: Provider[] = [
 ]
 
 // Export with potential override from custom configuration
-export const INITIAL_PROVIDERS = getCustomConfig('INITIAL_PROVIDERS', DEFAULT_INITIAL_PROVIDERS)
+export const INITIAL_PROVIDERS = CUSTOM_INITIAL_PROVIDERS || DEFAULT_INITIAL_PROVIDERS
 
 // Original initial state definition
 const DEFAULT_INITIAL_STATE: LlmState = {
@@ -506,16 +511,16 @@ const DEFAULT_INITIAL_STATE: LlmState = {
 
 // Override specific models from custom configuration
 const modelOverrides = {
-  defaultModel: getCustomConfig('DEFAULT_MODEL', DEFAULT_INITIAL_STATE.defaultModel),
-  topicNamingModel: getCustomConfig('TOPIC_NAMING_MODEL', DEFAULT_INITIAL_STATE.topicNamingModel),
-  translateModel: getCustomConfig('TRANSLATE_MODEL', DEFAULT_INITIAL_STATE.translateModel)
+  defaultModel: CUSTOM_DEFAULT_MODEL || DEFAULT_INITIAL_STATE.defaultModel,
+  topicNamingModel: CUSTOM_TOPIC_NAMING_MODEL || DEFAULT_INITIAL_STATE.topicNamingModel,
+  translateModel: CUSTOM_TRANSLATE_MODEL || DEFAULT_INITIAL_STATE.translateModel
 }
 
 // Export with potential override from custom configuration
-const initialState: LlmState = getCustomConfig('INITIAL_STATE', {
+const initialState: LlmState = {
   ...DEFAULT_INITIAL_STATE,
   ...modelOverrides
-})
+}
 
 const getIntegratedInitialState = () => {
   const model = JSON.parse(import.meta.env.VITE_RENDERER_INTEGRATED_MODEL)

@@ -4,25 +4,25 @@ This repository includes a custom configuration system for Verger (forked from C
 
 ## How It Works
 
-The custom configuration system reads settings directly from a JSON file (`custom-config.json`) at runtime. This approach is simpler and more reliable than using environment variables.
+The custom configuration system uses a TypeScript file (`src/renderer/src/config/custom-config.ts`) that defines constants used throughout the application. This approach is simpler and more reliable than using runtime configuration files.
 
 ## Configuration Options
 
 You can customize the following settings:
 
-- **SYSTEM_MODELS**: Override the available models for each provider
-- **DEFAULT_MODEL**: Set the default model for new conversations
-- **TOPIC_NAMING_MODEL**: Set the model used for generating topic names
-- **TRANSLATE_MODEL**: Set the model used for translations
-- **INITIAL_PROVIDERS**: Configure which providers are available and enabled by default
-- **TOPIC_NAMING_PROMPT**: Set a custom prompt for generating topic names
-- **SETTINGS**: Override any application settings
+- **CUSTOM_SYSTEM_MODELS**: Override the available models for each provider
+- **CUSTOM_DEFAULT_MODEL**: Set the default model for new conversations
+- **CUSTOM_TOPIC_NAMING_MODEL**: Set the model used for generating topic names
+- **CUSTOM_TRANSLATE_MODEL**: Set the model used for translations
+- **CUSTOM_INITIAL_PROVIDERS**: Configure which providers are available and enabled by default
+- **CUSTOM_TOPIC_NAMING_PROMPT**: Set a custom prompt for generating topic names
+- **CUSTOM_SETTINGS**: Override any application settings
 
 ## How to Use
 
 ### Local Development
 
-1. Edit the `custom-config.json` file to customize your settings
+1. Edit the `src/renderer/src/config/custom-config.ts` file to customize your settings
 2. Run the standard build script:
 
 ```bash
@@ -46,75 +46,73 @@ The repository includes a GitHub workflow that uses your custom configuration:
 1. Go to the "Actions" tab in your GitHub repository
 2. Select the "Release" workflow
 3. Click "Run workflow"
-4. Enter the release tag and the path to your custom configuration file
+4. Enter the release tag
 5. Click "Run workflow" to start the build process
 
 ## Example Configuration
 
-```json
-{
-  "SYSTEM_MODELS": {
-    "openai": [
-      { "id": "gpt-4o", "provider": "openai", "name": "GPT-4o", "group": "GPT 4o" },
-      { "id": "gpt-4o-mini", "provider": "openai", "name": "GPT-4o-mini", "group": "GPT 4o" },
-      { "id": "gpt-3.5-turbo", "provider": "openai", "name": "GPT-3.5 Turbo", "group": "GPT 3.5" }
-    ],
-    "gemini": [
-      { "id": "gemini-1.5-flash", "provider": "gemini", "name": "Gemini 1.5 Flash", "group": "Gemini 1.5" },
-      { "id": "gemini-1.5-pro", "provider": "gemini", "name": "Gemini 1.5 Pro", "group": "Gemini 1.5" }
-    ]
-  },
-  "DEFAULT_MODEL": {
-    "id": "gpt-4o",
-    "name": "GPT-4o",
-    "provider": "openai",
-    "group": "GPT 4o"
-  },
-  "TOPIC_NAMING_MODEL": {
-    "id": "gpt-4o-mini",
-    "name": "GPT-4o-mini",
-    "provider": "openai",
-    "group": "GPT 4o"
-  },
-  "TRANSLATE_MODEL": {
-    "id": "gpt-3.5-turbo",
-    "name": "GPT-3.5 Turbo",
-    "provider": "openai",
-    "group": "GPT 3.5"
-  },
-  "INITIAL_PROVIDERS": [
+```typescript
+// custom-config.ts
+import { ModelInfo, Provider } from '@shared/types'
+
+// Custom system models
+export const CUSTOM_SYSTEM_MODELS: Record<string, ModelInfo[]> = {
+  openai: [
     {
-      "id": "openai",
-      "name": "OpenAI",
-      "type": "openai",
-      "apiKey": "",
-      "apiHost": "https://api.openai.com",
-      "models": [],
-      "isSystem": true,
-      "enabled": true
+      id: 'gpt-4o',
+      provider: 'openai',
+      name: 'GPT-4o',
+      group: 'GPT 4o'
     },
     {
-      "id": "silicon",
-      "name": "Silicon",
-      "type": "openai",
-      "apiKey": "",
-      "apiHost": "https://api.siliconflow.cn",
-      "models": [],
-      "isSystem": true,
-      "enabled": false
+      id: 'gpt-4o-mini',
+      provider: 'openai',
+      name: 'GPT-4o-mini',
+      group: 'GPT 4o'
+    },
+    {
+      id: 'gpt-3.5-turbo',
+      provider: 'openai',
+      name: 'GPT-3.5 Turbo',
+      group: 'GPT 3.5'
     }
   ],
-  "TOPIC_NAMING_PROMPT": "Generate an English title with 10 characters or less"
+  gemini: [
+    {
+      id: 'gemini-1.5-flash',
+      provider: 'gemini',
+      name: 'Gemini 1.5 Flash',
+      group: 'Gemini 1.5'
+    },
+    {
+      id: 'gemini-1.5-pro',
+      provider: 'gemini',
+      name: 'Gemini 1.5 Pro',
+      group: 'Gemini 1.5'
+    }
+  ]
 }
+
+// Custom default model
+export const CUSTOM_DEFAULT_MODEL: ModelInfo = {
+  id: 'gpt-4o',
+  name: 'GPT-4o',
+  provider: 'openai',
+  group: 'GPT 4o'
+}
+
+// Custom topic naming prompt
+export const CUSTOM_TOPIC_NAMING_PROMPT = 'Generate an English title with 10 characters or less'
 ```
 
 ## Advantages
 
+- **Type Safety**: The TypeScript compiler ensures that your configuration is valid
+- **No Runtime File Access**: The configuration is baked into the application at build time
+- **Better Performance**: No file I/O operations are needed at runtime
+- **Improved Reliability**: No risk of file access errors or missing files in production builds
+- **Easy to Maintain**: All configuration is in a single file with proper TypeScript types
 - **No Source Code Modifications**: The original source files remain untouched, making it easier to merge updates from upstream.
-- **Flexible Configuration**: You can override specific parts of the configuration or the entire state.
-- **Runtime Integration**: The changes are applied at runtime, so they're always used regardless of how the application was built.
-- **Maintainable**: By extracting configuration to a separate JSON file, you can easily update your custom settings without modifying the code.
-- **Simplicity**: Direct file access is simpler and more reliable than environment variables.
 
 ## Updating from Upstream
 
@@ -124,11 +122,12 @@ When updating from the upstream repository, you may need to update the custom co
 
 The custom configuration system works by:
 
-1. Reading the `custom-config.json` file directly at runtime
-2. Using the values from this file to override default settings
-3. Falling back to default values if the file doesn't exist or a specific setting isn't defined
+1. Defining constants in the `custom-config.ts` file
+2. Importing these constants in the relevant files
+3. Using these constants to override default settings
 
-The file is read from:
+The configuration is applied in the following files:
 
-- The project root directory in development mode
-- The resources directory in production mode
+- `src/renderer/src/config/models.ts`: Uses the `CUSTOM_SYSTEM_MODELS` constant
+- `src/renderer/src/store/llm.ts`: Uses the `CUSTOM_DEFAULT_MODEL`, `CUSTOM_TOPIC_NAMING_MODEL`, `CUSTOM_TRANSLATE_MODEL`, and `CUSTOM_INITIAL_PROVIDERS` constants
+- `src/renderer/src/store/settings.ts`: Uses the `CUSTOM_SETTINGS` and `CUSTOM_TOPIC_NAMING_PROMPT` constants

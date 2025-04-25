@@ -132,9 +132,9 @@ import YiModelLogoDark from '@renderer/assets/images/models/yi_dark.png'
 import { getProviderByModel } from '@renderer/services/AssistantService'
 import WebSearchService from '@renderer/services/WebSearchService'
 import { Assistant, Model } from '@renderer/types'
-import { getCustomConfig } from '@renderer/utils/custom-config'
 import OpenAI from 'openai'
 
+import { CUSTOM_SYSTEM_MODELS } from './custom-config'
 import { WEB_SEARCH_PROMPT_FOR_OPENROUTER } from './prompts'
 import { getWebSearchTools } from './tools'
 
@@ -2470,14 +2470,17 @@ export function groupQwenModels(models: Model[]): Record<string, Model[]> {
 }
 
 // Export with potential override from custom configuration
-// Try the new direct file approach first, fall back to environment variables if needed
-export const SYSTEM_MODELS = getCustomConfig('SYSTEM_MODELS', DEFAULT_SYSTEM_MODELS)
+// This now uses the build-time generated configuration
+export const SYSTEM_MODELS =
+  Object.keys(CUSTOM_SYSTEM_MODELS).length > 0
+    ? { ...DEFAULT_SYSTEM_MODELS, ...CUSTOM_SYSTEM_MODELS }
+    : DEFAULT_SYSTEM_MODELS
 
 // Log the loaded system models for debugging
 console.log('Loaded SYSTEM_MODELS providers:', Object.keys(SYSTEM_MODELS))
 // Check if the custom models were loaded correctly
-if (JSON.stringify(SYSTEM_MODELS) === JSON.stringify(DEFAULT_SYSTEM_MODELS)) {
-  console.warn('WARNING: Using default SYSTEM_MODELS - custom configuration may not have been applied correctly')
+if (Object.keys(CUSTOM_SYSTEM_MODELS).length === 0) {
+  console.warn('WARNING: Using default SYSTEM_MODELS - no custom configuration found')
 } else {
   console.log('Custom SYSTEM_MODELS configuration applied successfully')
 }
