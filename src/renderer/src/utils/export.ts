@@ -519,7 +519,7 @@ export const exportMarkdownToJoplin = async (title: string, content: string) => 
       body: JSON.stringify({
         title: title,
         body: content,
-        source: 'Cherry Studio'
+        source: 'Verger'
       })
     })
 
@@ -581,7 +581,7 @@ export const exportMarkdownToSiyuan = async (title: string, content: string) => 
     }
 
     // 确保根路径以/开头
-    const rootPath = siyuanRootPath?.startsWith('/') ? siyuanRootPath : `/${siyuanRootPath || 'CherryStudio'}`
+    const rootPath = siyuanRootPath?.startsWith('/') ? siyuanRootPath : `/${siyuanRootPath || 'Verger'}`
 
     // 创建文档
     const docTitle = `${title.replace(/[#|\\^\\[\]]/g, '')}`

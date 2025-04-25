@@ -60,8 +60,11 @@ const WebviewContainer = memo(
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [appid, url])
 
-    //remove the tag of CherryStudio and Electron
-    const userAgent = navigator.userAgent.replace(/CherryStudio\/\S+\s/, '').replace(/Electron\/\S+\s/, '')
+    //remove the tag of Verger and Electron
+    const userAgent = navigator.userAgent
+      .replace(/CherryStudio\/\S+\s/, '')
+      .replace(/Verger\/\S+\s/, '')
+      .replace(/Electron\/\S+\s/, '')
 
     return (
       <webview
