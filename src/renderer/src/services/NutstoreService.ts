@@ -90,7 +90,7 @@ export async function backupToNutstore({
     Logger.error('[Backup] Failed to get device type:', error)
   }
   const timestamp = dayjs().format('YYYYMMDDHHmmss')
-  const backupFileName = customFileName || `cherry-studio.${timestamp}.${deviceType}.zip`
+  const backupFileName = customFileName || `verger.${timestamp}.${deviceType}.zip`
   const finalFileName = backupFileName.endsWith('.zip') ? backupFileName : `${backupFileName}.zip`
 
   isManualBackupRunning = true
