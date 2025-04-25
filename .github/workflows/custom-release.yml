@@ -83,9 +83,20 @@ jobs:
           fi
           echo "Custom configuration file found at $CONFIG_PATH"
 
-      # Apply custom configuration
+      # Apply custom configuration and export to GitHub environment
       - name: Apply custom configuration
-        run: node scripts/apply-custom-config.js
+        run: |
+          # Run the script with output redirection to capture environment variables
+          node -e "
+            const config = require('./scripts/apply-custom-config.js');
+            // Write environment variables to GitHub's environment file
+            const fs = require('fs');
+            Object.entries(config).forEach(([key, value]) => {
+              const envValue = typeof value === 'string' ? value : JSON.stringify(value);
+              fs.appendFileSync(process.env.GITHUB_ENV, `CUSTOM_${key}=${envValue}\n`);
+              console.log('Added to GITHUB_ENV:', 'CUSTOM_' + key);
+            });
+          "
         env:
           CUSTOM_CONFIG_PATH: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.config_path || 'custom-config.json' }}
 

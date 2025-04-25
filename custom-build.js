@@ -17,10 +17,16 @@ if (fs.existsSync(configPath)) {
   process.exit(1)
 }
 
-// Set environment variables
-Object.entries(config).forEach(([key, value]) => {
-  process.env[`CUSTOM_${key}`] = typeof value === 'string' ? value : JSON.stringify(value)
-})
+// Generate a temporary .env file with custom environment variables
+const tempEnvFile = path.resolve(__dirname, '.temp-env')
+const envContent = Object.entries(config)
+  .map(([key, value]) => {
+    const envValue = typeof value === 'string' ? value : JSON.stringify(value)
+    return `CUSTOM_${key}=${envValue}`
+  })
+  .join('\n')
+
+fs.writeFileSync(tempEnvFile, envContent)
 
 console.log('Custom environment variables set:')
 Object.keys(config).forEach((key) => {
@@ -37,14 +43,25 @@ if (process.platform === 'win32') {
   console.log(`Using Node.js from: ${nodePath}`)
 }
 
-// Run npm build command
-const buildProcess = spawn(process.platform === 'win32' ? 'npm.cmd' : 'npm', ['run', 'build'], {
-  stdio: 'inherit',
-  env: process.env,
-  shell: true
-})
+// Run npm build command with dotenv to load environment variables
+const buildProcess = spawn(
+  process.platform === 'win32' ? 'npx.cmd' : 'npx',
+  ['dotenv', '-e', tempEnvFile, process.platform === 'win32' ? 'npm.cmd' : 'npm', 'run', 'build'],
+  {
+    stdio: 'inherit',
+    shell: true
+  }
+)
 
 buildProcess.on('close', (code) => {
+  // Clean up the temporary .env file
+  try {
+    fs.unlinkSync(tempEnvFile)
+    console.log('Cleaned up temporary environment file')
+  } catch (error) {
+    console.warn('Failed to clean up temporary environment file:', error)
+  }
+
   if (code === 0) {
     console.log('\nBuild completed successfully with custom configuration!')
   } else {
