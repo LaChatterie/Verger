@@ -18,7 +18,7 @@ interface Props {
   text: string
 }
 
-let _targetLanguage = 'chinese'
+let _targetLanguage = 'english'
 
 const Translate: FC<Props> = ({ text }) => {
   const [result, setResult] = useState('')

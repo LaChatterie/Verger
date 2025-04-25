@@ -11,11 +11,9 @@ Verger is a fork of [Cherry Studio](https://github.com/CherryHQ/cherry-studio) t
 
 ## Enhancements
 
-- **Custom Configuration System**: Easily customize settings without modifying source code
-- **Optimized Defaults**: Pre-configured for OpenAI and Gemini models
-- **English-Only Interface**: All prompts and UI elements in English
+- **Optimized Defaults**: Pre-configured for best uncensored models, longer default context
+- **English-Only Interface**: All default content in English
 - **Improved Privacy**: Disabled Sentry error reporting
-- **Streamlined Builds**: Custom build scripts for easy deployment
 
 # 🌟 Key Features
 

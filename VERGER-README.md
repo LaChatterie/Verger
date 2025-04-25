@@ -7,7 +7,7 @@ Verger is a fork of [Cherry Studio](https://github.com/CherryHQ/cherry-studio), 
 Verger maintains the core functionality of Cherry Studio while adding:
 
 - Default configuration only with best uncensored models that do no route via China, including European options.
-- English-only interface and prompts
+- English-only defaults and prompts
 - Disabled Sentry error reporting for improved privacy
 
 ## Build Configuration
