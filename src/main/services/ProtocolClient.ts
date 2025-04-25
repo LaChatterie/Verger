@@ -1,6 +1,6 @@
 import { windowService } from './WindowService'
 
-export const CHERRY_STUDIO_PROTOCOL = 'cherrystudio'
+export const CHERRY_STUDIO_PROTOCOL = 'verger'
 
 export function registerProtocolClient(app: Electron.App) {
   if (process.defaultApp) {
@@ -9,13 +9,13 @@ export function registerProtocolClient(app: Electron.App) {
     }
   }
 
-  app.setAsDefaultProtocolClient('cherrystudio')
+  app.setAsDefaultProtocolClient('verger')
 }
 
 export function handleProtocolUrl(url: string) {
   if (!url) return
   // Process the URL that was used to open the app
-  // The url will be in the format: cherrystudio://data?param1=value1&param2=value2
+  // The url will be in the format: verger://data?param1=value1&param2=value2
   console.log('Received URL:', url)
 
   // Parse the URL and extract parameters
