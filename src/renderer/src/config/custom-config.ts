@@ -2,10 +2,10 @@
 // This file contains custom configuration for Verger
 // Edit this file to customize your settings
 
-import { ModelInfo, Provider } from '@shared/types'
+import { Model, Provider } from '@renderer/types'
 
 // Custom system models
-export const CUSTOM_SYSTEM_MODELS: Record<string, ModelInfo[]> = {
+export const CUSTOM_SYSTEM_MODELS: Record<string, Model[]> = {
   ollama: [],
   lmstudio: [],
   openai: [
@@ -159,7 +159,7 @@ export const CUSTOM_SYSTEM_MODELS: Record<string, ModelInfo[]> = {
 }
 
 // Custom default model
-export const CUSTOM_DEFAULT_MODEL: ModelInfo = {
+export const CUSTOM_DEFAULT_MODEL: Model = {
   id: 'google/gemini-2.5-flash-preview',
   provider: 'openrouter',
   name: 'Google: Gemini 2.5 Flash Preview',
@@ -167,7 +167,7 @@ export const CUSTOM_DEFAULT_MODEL: ModelInfo = {
 }
 
 // Custom topic naming model
-export const CUSTOM_TOPIC_NAMING_MODEL: ModelInfo = {
+export const CUSTOM_TOPIC_NAMING_MODEL: Model = {
   id: 'gpt-4.1-mini',
   name: 'GPT 4.1 mini',
   provider: 'openai',
@@ -175,7 +175,7 @@ export const CUSTOM_TOPIC_NAMING_MODEL: ModelInfo = {
 }
 
 // Custom translate model
-export const CUSTOM_TRANSLATE_MODEL: ModelInfo = {
+export const CUSTOM_TRANSLATE_MODEL: Model = {
   id: 'gpt-3.5-turbo',
   name: 'GPT-3.5 Turbo',
   provider: 'openai',
@@ -190,7 +190,7 @@ export const CUSTOM_INITIAL_PROVIDERS: Provider[] = [
     type: 'openai',
     apiKey: '',
     apiHost: 'https://openrouter.ai/api/v1/',
-    models: [],
+    models: CUSTOM_SYSTEM_MODELS.openrouter,
     isSystem: true,
     enabled: false
   },
@@ -200,7 +200,7 @@ export const CUSTOM_INITIAL_PROVIDERS: Provider[] = [
     type: 'anthropic',
     apiKey: '',
     apiHost: 'https://api.anthropic.com/',
-    models: [],
+    models: CUSTOM_SYSTEM_MODELS.anthropic,
     isSystem: true,
     enabled: false
   },
@@ -210,7 +210,7 @@ export const CUSTOM_INITIAL_PROVIDERS: Provider[] = [
     type: 'openai',
     apiKey: '',
     apiHost: 'https://api.openai.com',
-    models: [],
+    models: CUSTOM_SYSTEM_MODELS.openai,
     isSystem: true,
     enabled: false
   },
@@ -221,7 +221,7 @@ export const CUSTOM_INITIAL_PROVIDERS: Provider[] = [
     apiKey: '',
     apiHost: '',
     apiVersion: '',
-    models: [],
+    models: CUSTOM_SYSTEM_MODELS['azure-openai'],
     isSystem: true,
     enabled: false
   },
@@ -231,7 +231,7 @@ export const CUSTOM_INITIAL_PROVIDERS: Provider[] = [
     type: 'gemini',
     apiKey: '',
     apiHost: 'https://generativelanguage.googleapis.com',
-    models: [],
+    models: CUSTOM_SYSTEM_MODELS.gemini,
     isSystem: true,
     enabled: false
   },
@@ -241,7 +241,7 @@ export const CUSTOM_INITIAL_PROVIDERS: Provider[] = [
     type: 'openai',
     apiKey: '',
     apiHost: 'https://api.groq.com/openai',
-    models: [],
+    models: CUSTOM_SYSTEM_MODELS.groq,
     isSystem: true,
     enabled: false
   }

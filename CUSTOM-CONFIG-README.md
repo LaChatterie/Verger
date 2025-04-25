@@ -53,10 +53,10 @@ The repository includes a GitHub workflow that uses your custom configuration:
 
 ```typescript
 // custom-config.ts
-import { ModelInfo, Provider } from '@shared/types'
+import { Model, Provider } from '@renderer/types'
 
 // Custom system models
-export const CUSTOM_SYSTEM_MODELS: Record<string, ModelInfo[]> = {
+export const CUSTOM_SYSTEM_MODELS: Record<string, Model[]> = {
   openai: [
     {
       id: 'gpt-4o',
@@ -94,7 +94,7 @@ export const CUSTOM_SYSTEM_MODELS: Record<string, ModelInfo[]> = {
 }
 
 // Custom default model
-export const CUSTOM_DEFAULT_MODEL: ModelInfo = {
+export const CUSTOM_DEFAULT_MODEL: Model = {
   id: 'gpt-4o',
   name: 'GPT-4o',
   provider: 'openai',
