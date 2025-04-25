@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { TRANSLATE_PROMPT } from '@renderer/config/prompts'
 import { CodeStyleVarious, LanguageVarious, MathEngine, ThemeMode, TranslateLanguageVarious } from '@renderer/types'
-import { getCustomEnvConfig } from '@renderer/utils/custom-env'
+import { getCustomConfig } from '@renderer/utils/custom-config'
 import { IpcChannel } from '@shared/IpcChannel'
 
 import { WebDAVSyncState } from './backup'
@@ -231,8 +231,8 @@ const DEFAULT_INITIAL_STATE: SettingsState = {
   }
 }
 
-// Export with potential override from environment variables
-export const initialState: SettingsState = getCustomEnvConfig('SETTINGS', DEFAULT_INITIAL_STATE)
+// Export with potential override from custom configuration
+export const initialState: SettingsState = getCustomConfig('SETTINGS', DEFAULT_INITIAL_STATE)
 
 const settingsSlice = createSlice({
   name: 'settings',

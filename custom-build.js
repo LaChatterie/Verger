@@ -1,37 +1,34 @@
 // custom-build.js
+// This script is a convenience wrapper around the standard build process
+// that ensures the custom-config.json file exists before building.
+
 const fs = require('fs')
 const path = require('path')
 const { spawn } = require('child_process')
 
-// Load custom configuration
+// Check if custom configuration exists
 const configPath = path.resolve(__dirname, 'custom-config.json')
-let config = {}
 
-if (fs.existsSync(configPath)) {
-  console.log('Loading configuration from custom-config.json')
-  config = JSON.parse(fs.readFileSync(configPath, 'utf8'))
-} else {
+if (!fs.existsSync(configPath)) {
   console.error('ERROR: No custom-config.json found!')
   console.error('The custom configuration file is required for the build process.')
   console.error('Please create a custom-config.json file before running the build.')
   process.exit(1)
 }
 
-// Generate a temporary .env file with custom environment variables
-const tempEnvFile = path.resolve(__dirname, '.temp-env')
-const envContent = Object.entries(config)
-  .map(([key, value]) => {
-    const envValue = typeof value === 'string' ? value : JSON.stringify(value)
-    return `CUSTOM_${key}=${envValue}`
+// Verify the custom configuration is valid JSON
+try {
+  const config = JSON.parse(fs.readFileSync(configPath, 'utf8'))
+  console.log('Loaded custom configuration from custom-config.json')
+  console.log('Configuration contains the following keys:')
+  Object.keys(config).forEach((key) => {
+    console.log(`- ${key}`)
   })
-  .join('\n')
-
-fs.writeFileSync(tempEnvFile, envContent)
-
-console.log('Custom environment variables set:')
-Object.keys(config).forEach((key) => {
-  console.log(`- CUSTOM_${key}`)
-})
+} catch (error) {
+  console.error('ERROR: Failed to parse custom-config.json')
+  console.error(error)
+  process.exit(1)
+}
 
 // Run the build command
 console.log('\nStarting build with custom configuration...')
@@ -43,25 +40,13 @@ if (process.platform === 'win32') {
   console.log(`Using Node.js from: ${nodePath}`)
 }
 
-// Run npm build command with dotenv to load environment variables
-const buildProcess = spawn(
-  process.platform === 'win32' ? 'npx.cmd' : 'npx',
-  ['dotenv', '-e', tempEnvFile, process.platform === 'win32' ? 'npm.cmd' : 'npm', 'run', 'build'],
-  {
-    stdio: 'inherit',
-    shell: true
-  }
-)
+// Run yarn build command
+const buildProcess = spawn(process.platform === 'win32' ? 'yarn.cmd' : 'yarn', ['build'], {
+  stdio: 'inherit',
+  shell: true
+})
 
 buildProcess.on('close', (code) => {
-  // Clean up the temporary .env file
-  try {
-    fs.unlinkSync(tempEnvFile)
-    console.log('Cleaned up temporary environment file')
-  } catch (error) {
-    console.warn('Failed to clean up temporary environment file:', error)
-  }
-
   if (code === 0) {
     console.log('\nBuild completed successfully with custom configuration!')
   } else {

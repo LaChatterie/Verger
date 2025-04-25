@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { isLocalAi } from '@renderer/config/env'
 import { SYSTEM_MODELS } from '@renderer/config/models'
 import { Model, Provider } from '@renderer/types'
-import { getCustomEnvConfig, getCustomModelConfig, mergeCustomEnvConfig } from '@renderer/utils/custom-env'
+import { getCustomConfig } from '@renderer/utils/custom-config'
 import { IpcChannel } from '@shared/IpcChannel'
 import { uniqBy } from 'lodash'
 
@@ -482,8 +482,8 @@ const DEFAULT_INITIAL_PROVIDERS: Provider[] = [
   }
 ]
 
-// Export with potential override from environment variables
-export const INITIAL_PROVIDERS = getCustomEnvConfig('INITIAL_PROVIDERS', DEFAULT_INITIAL_PROVIDERS)
+// Export with potential override from custom configuration
+export const INITIAL_PROVIDERS = getCustomConfig('INITIAL_PROVIDERS', DEFAULT_INITIAL_PROVIDERS)
 
 // Original initial state definition
 const DEFAULT_INITIAL_STATE: LlmState = {
@@ -504,15 +504,15 @@ const DEFAULT_INITIAL_STATE: LlmState = {
   }
 }
 
-// Override specific models if environment variables are set
+// Override specific models from custom configuration
 const modelOverrides = {
-  defaultModel: getCustomModelConfig('DEFAULT_MODEL', DEFAULT_INITIAL_STATE.defaultModel),
-  topicNamingModel: getCustomModelConfig('TOPIC_NAMING_MODEL', DEFAULT_INITIAL_STATE.topicNamingModel),
-  translateModel: getCustomModelConfig('TRANSLATE_MODEL', DEFAULT_INITIAL_STATE.translateModel)
+  defaultModel: getCustomConfig('DEFAULT_MODEL', DEFAULT_INITIAL_STATE.defaultModel),
+  topicNamingModel: getCustomConfig('TOPIC_NAMING_MODEL', DEFAULT_INITIAL_STATE.topicNamingModel),
+  translateModel: getCustomConfig('TRANSLATE_MODEL', DEFAULT_INITIAL_STATE.translateModel)
 }
 
-// Export with potential override from environment variables
-const initialState: LlmState = mergeCustomEnvConfig('INITIAL_STATE', {
+// Export with potential override from custom configuration
+const initialState: LlmState = getCustomConfig('INITIAL_STATE', {
   ...DEFAULT_INITIAL_STATE,
   ...modelOverrides
 })

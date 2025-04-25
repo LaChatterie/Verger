@@ -16,13 +16,11 @@ permissions:
 
 jobs:
   release:
-    # Only run on the original repository, not on forks
-    if: github.repository_owner == 'CherryHQ'
     runs-on: ${{ matrix.os }}
 
     strategy:
       matrix:
-        os: [macos-latest, windows-latest, ubuntu-latest]
+        os: [windows-latest, ubuntu-latest]
       fail-fast: false
 
     steps:

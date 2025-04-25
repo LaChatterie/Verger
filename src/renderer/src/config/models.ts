@@ -132,7 +132,7 @@ import YiModelLogoDark from '@renderer/assets/images/models/yi_dark.png'
 import { getProviderByModel } from '@renderer/services/AssistantService'
 import WebSearchService from '@renderer/services/WebSearchService'
 import { Assistant, Model } from '@renderer/types'
-import { getCustomEnvConfig } from '@renderer/utils/custom-env'
+import { getCustomConfig } from '@renderer/utils/custom-config'
 import OpenAI from 'openai'
 
 import { WEB_SEARCH_PROMPT_FOR_OPENROUTER } from './prompts'
@@ -2469,8 +2469,9 @@ export function groupQwenModels(models: Model[]): Record<string, Model[]> {
   )
 }
 
-// Export with potential override from environment variables
-export const SYSTEM_MODELS = getCustomEnvConfig('SYSTEM_MODELS', DEFAULT_SYSTEM_MODELS)
+// Export with potential override from custom configuration
+// Try the new direct file approach first, fall back to environment variables if needed
+export const SYSTEM_MODELS = getCustomConfig('SYSTEM_MODELS', DEFAULT_SYSTEM_MODELS)
 
 // Log the loaded system models for debugging
 console.log('Loaded SYSTEM_MODELS providers:', Object.keys(SYSTEM_MODELS))
