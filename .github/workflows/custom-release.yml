@@ -71,6 +71,18 @@ jobs:
       - name: Install Dependencies
         run: yarn install
 
+      # Check if custom configuration file exists
+      - name: Check custom configuration file
+        id: check-config
+        shell: bash
+        run: |
+          CONFIG_PATH="${{ github.event_name == 'workflow_dispatch' && github.event.inputs.config_path || 'custom-config.json' }}"
+          if [ ! -f "$CONFIG_PATH" ]; then
+            echo "::error::Custom configuration file not found at $CONFIG_PATH"
+            exit 1
+          fi
+          echo "Custom configuration file found at $CONFIG_PATH"
+
       # Apply custom configuration
       - name: Apply custom configuration
         run: node scripts/apply-custom-config.js

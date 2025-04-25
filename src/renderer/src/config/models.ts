@@ -2471,3 +2471,12 @@ export function groupQwenModels(models: Model[]): Record<string, Model[]> {
 
 // Export with potential override from environment variables
 export const SYSTEM_MODELS = getCustomEnvConfig('SYSTEM_MODELS', DEFAULT_SYSTEM_MODELS)
+
+// Log the loaded system models for debugging
+console.log('Loaded SYSTEM_MODELS providers:', Object.keys(SYSTEM_MODELS))
+// Check if the custom models were loaded correctly
+if (JSON.stringify(SYSTEM_MODELS) === JSON.stringify(DEFAULT_SYSTEM_MODELS)) {
+  console.warn('WARNING: Using default SYSTEM_MODELS - custom configuration may not have been applied correctly')
+} else {
+  console.log('Custom SYSTEM_MODELS configuration applied successfully')
+}
