@@ -1,4 +1,4 @@
-import { sentryVitePlugin } from '@sentry/vite-plugin'
+// import { sentryVitePlugin } from '@sentry/vite-plugin' // Disabled Sentry
 import viteReact from '@vitejs/plugin-react'
 import { defineConfig, externalizeDepsPlugin } from 'electron-vite'
 import { resolve } from 'path'
@@ -67,11 +67,12 @@ export default defineConfig({
           ]
         }
       }),
-      sentryVitePlugin({
-        authToken: process.env.SENTRY_AUTH_TOKEN,
-        org: 'cherry-ai',
-        project: 'cherry-studio'
-      }),
+      // Sentry plugin disabled
+      // sentryVitePlugin({
+      //   authToken: process.env.SENTRY_AUTH_TOKEN,
+      //   org: 'cherry-ai',
+      //   project: 'cherry-studio'
+      // }),
       ...visualizerPlugin('renderer')
     ],
     resolve: {
