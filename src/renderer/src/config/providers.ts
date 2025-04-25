@@ -125,11 +125,11 @@ export const PROVIDER_CONFIG = {
       url: 'https://api.ppinfra.com/v3/openai'
     },
     websites: {
-      official: 'https://ppinfra.com/user/register?invited_by=JYT9GD&utm_source=github_cherry-studio',
-      apiKey: 'https://ppinfra.com/user/register?invited_by=JYT9GD&utm_source=github_cherry-studio',
-      docs: 'https://docs.cherry-ai.com/pre-basic/providers/ppio?invited_by=JYT9GD&utm_source=github_cherry-studio',
+      official: 'https://ppinfra.com/user/register?invited_by=JYT9GD&utm_source=github_verger',
+      apiKey: 'https://ppinfra.com/user/register?invited_by=JYT9GD&utm_source=github_verger',
+      docs: 'https://docs.cherry-ai.com/pre-basic/providers/ppio?invited_by=JYT9GD&utm_source=github_verger',
       models:
-        'https://ppinfra.com/model-api/product/llm-api?utm_source=github_cherry-studio&utm_medium=github_readme&utm_campaign=link'
+        'https://ppinfra.com/model-api/product/llm-api?utm_source=github_verger&utm_medium=github_readme&utm_campaign=link'
     }
   },
   gemini: {
@@ -362,10 +362,10 @@ export const PROVIDER_CONFIG = {
       url: 'https://deepseek.alayanew.com'
     },
     websites: {
-      official: 'https://www.alayanew.com/backend/register?id=cherrystudio',
-      apiKey: ' https://www.alayanew.com/backend/register?id=cherrystudio',
-      docs: 'https://docs.alayanew.com/docs/modelService/interview?utm_source=cherrystudio',
-      models: 'https://www.alayanew.com/product/deepseek?id=cherrystudio'
+      official: 'https://www.alayanew.com/backend/register?id=verger',
+      apiKey: ' https://www.alayanew.com/backend/register?id=verger',
+      docs: 'https://docs.alayanew.com/docs/modelService/interview?utm_source=verger',
+      models: 'https://www.alayanew.com/product/deepseek?id=verger'
     }
   },
   openrouter: {

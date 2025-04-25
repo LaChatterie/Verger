@@ -23,7 +23,7 @@ export const oauthWithSiliconFlow = async (setKey) => {
 }
 
 export const oauthWithAihubmix = async (setKey) => {
-  const authUrl = ` https://aihubmix.com/token?client_id=cherry_studio_oauth&lang=${getLanguageCode()}&aff=SJyh`
+  const authUrl = ` https://aihubmix.com/token?client_id=verger_oauth&lang=${getLanguageCode()}&aff=SJyh`
 
   const popup = window.open(
     authUrl,
@@ -34,7 +34,7 @@ export const oauthWithAihubmix = async (setKey) => {
   const messageHandler = async (event) => {
     const data = event.data
 
-    if (data && data.key === 'cherry_studio_oauth_callback') {
+    if (data && (data.key === 'cherry_studio_oauth_callback' || data.key === 'verger_oauth_callback')) {
       const { iv, encryptedData } = data.data
 
       try {
@@ -66,7 +66,7 @@ export const providerCharge = async (provider: string) => {
       height: 700
     },
     aihubmix: {
-      url: `https://aihubmix.com/topup?client_id=cherry_studio_oauth&lang=${getLanguageCode()}&aff=SJyh`,
+      url: `https://aihubmix.com/topup?client_id=verger_oauth&lang=${getLanguageCode()}&aff=SJyh`,
       width: 720,
       height: 900
     }
