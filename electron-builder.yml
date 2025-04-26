@@ -77,6 +77,8 @@ linux:
   desktop:
     entry:
       StartupWMClass: Verger
+  mimeTypes:
+    - x-scheme-handler/verger
 publish:
   provider: generic
   url: https://releases.cherry-ai.com
