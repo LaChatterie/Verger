@@ -80,8 +80,9 @@ linux:
   mimeTypes:
     - x-scheme-handler/verger
 publish:
-  provider: generic
-  url: https://releases.cherry-ai.com
+  provider: github
+  owner: cmbant
+  repo: AI-verger
 electronDownload:
   mirror: https://npmmirror.com/mirrors/electron/
 afterPack: scripts/after-pack.js

@@ -2,7 +2,7 @@ import '@renderer/databases'
 
 import store, { persistor } from '@renderer/store'
 import { Provider } from 'react-redux'
-import { HashRouter, Route, Routes } from 'react-router-dom'
+import { HashRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { PersistGate } from 'redux-persist/integration/react'
 
 import Sidebar from './components/app/Sidebar'
@@ -36,7 +36,7 @@ function App(): React.ReactElement {
                     <Routes>
                       <Route path="/" element={<HomePage />} />
                       <Route path="/agents" element={<AgentsPage />} />
-                      <Route path="/paintings" element={<PaintingsPage />} />
+                      <Route path="/paintings" element={<Navigate to="/" replace />} />
                       <Route path="/translate" element={<TranslatePage />} />
                       <Route path="/files" element={<FilesPage />} />
                       <Route path="/knowledge" element={<KnowledgePage />} />

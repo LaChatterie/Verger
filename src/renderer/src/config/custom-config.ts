@@ -304,7 +304,11 @@ export const CUSTOM_INITIAL_PROVIDERS: Provider[] = [
 export const CUSTOM_TOPIC_NAMING_PROMPT = 'Generate an English title with 10 characters or less'
 
 // Custom settings
-export const CUSTOM_SETTINGS = undefined // Set to an object to override default settings
+export const CUSTOM_SETTINGS = {
+  sidebarIcons: {
+    visible: ['assistants', 'agents', 'translate', 'minapp', 'knowledge', 'files']
+  }
+} // Override default settings to hide paintings
 
 // Custom default MiniApps
 // Set to an array of MinAppType to override the default MiniApp list
