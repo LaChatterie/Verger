@@ -6,9 +6,13 @@ import { Model, Provider } from '@renderer/types'
 
 // Custom system models
 export const CUSTOM_SYSTEM_MODELS: Record<string, Model[]> = {
-  ollama: [],
-  lmstudio: [],
   openai: [
+    {
+      id: 'gpt-4o-latest',
+      provider: 'openai',
+      name: 'ChatGPT 4o',
+      group: 'GPT 4o'
+    },
     {
       id: 'gpt-4.1-mini',
       provider: 'openai',
@@ -31,12 +35,14 @@ export const CUSTOM_SYSTEM_MODELS: Record<string, Model[]> = {
       id: 'o4-mini',
       provider: 'openai',
       name: ' o4 mini',
+      description: 'Fast thinking model',
       group: 'o4'
     },
     {
       id: 'o3',
       provider: 'openai',
       name: ' o3',
+      description: 'latest thinking model',
       group: 'o3'
     }
   ],

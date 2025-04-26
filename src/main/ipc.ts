@@ -9,7 +9,6 @@ import { BrowserWindow, ipcMain, session, shell } from 'electron'
 import log from 'electron-log'
 
 import { titleBarOverlayDark, titleBarOverlayLight } from './config'
-import { initSentry } from './integration/sentry'
 import AppUpdater from './services/AppUpdater'
 import BackupManager from './services/BackupManager'
 import { configManager } from './services/ConfigManager'
@@ -26,6 +25,7 @@ import { ProxyConfig, proxyManager } from './services/ProxyManager'
 import { searchService } from './services/SearchService'
 import { registerShortcuts, unregisterAllShortcuts } from './services/ShortcutService'
 import { TrayService } from './services/TrayService'
+import { setOpenLinkExternal } from './services/WebviewService'
 import { windowService } from './services/WindowService'
 import { getResourcePath } from './utils'
 import { decrypt, encrypt } from './utils/aes'
@@ -178,20 +178,7 @@ export function registerIpc(mainWindow: BrowserWindow, app: Electron.App) {
 
   // check for update
   ipcMain.handle(IpcChannel.App_CheckForUpdate, async () => {
-    // 在 Windows 上，如果架构是 arm64，则不检查更新
-    if (isWin && (arch().includes('arm') || 'PORTABLE_EXECUTABLE_DIR' in process.env)) {
-      return {
-        currentVersion: app.getVersion(),
-        updateInfo: null
-      }
-    }
-
-    const update = await appUpdater.autoUpdater.checkForUpdates()
-
-    return {
-      currentVersion: appUpdater.autoUpdater.currentVersion,
-      updateInfo: update?.updateInfo
-    }
+    await appUpdater.checkForUpdates()
   })
 
   // zip
@@ -344,6 +331,8 @@ export function registerIpc(mainWindow: BrowserWindow, app: Electron.App) {
     return await searchService.openUrlInSearchWindow(uid, url)
   })
 
-  // sentry
-  ipcMain.handle(IpcChannel.Sentry_Init, () => initSentry())
+  // webview
+  ipcMain.handle(IpcChannel.Webview_SetOpenLinkExternal, (_, webviewId: number, isExternal: boolean) =>
+    setOpenLinkExternal(webviewId, isExternal)
+  )
 }

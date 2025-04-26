@@ -1,2 +1,5 @@
 /.yarn/**            linguist-vendored
 /.yarn/releases/*    binary
+
+# Ignore nightly-build.yml in merges
+.github/workflows/nightly-build.yml merge=ours
