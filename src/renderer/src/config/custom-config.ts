@@ -5,7 +5,7 @@
 // Import app logos
 import AbacusLogo from '@renderer/assets/images/apps/abacus.webp?url'
 import AIStudioLogo from '@renderer/assets/images/apps/aistudio.svg?url'
-import GeminiAppLogo from '@renderer/assets/images/apps/gemini.webp?url'
+import GeminiAppLogo from '@renderer/assets/images/apps/gemini.png?url'
 import LeChatLogo from '@renderer/assets/images/apps/lechat.png?url'
 import NotebookLMAppLogo from '@renderer/assets/images/apps/notebooklm.svg?url'
 import YouLogo from '@renderer/assets/images/apps/you.jpg?url'
@@ -209,10 +209,10 @@ export const CUSTOM_TOPIC_NAMING_MODEL: Model = {
 
 // Custom translate model
 export const CUSTOM_TRANSLATE_MODEL: Model = {
-  id: 'gpt-3.5-turbo',
-  name: 'GPT-3.5 Turbo',
-  provider: 'openai',
-  group: 'GPT 3.5'
+  id: 'google/gemini-2.5-flash-preview',
+  provider: 'openrouter',
+  name: 'Google: Gemini 2.5 Flash Preview',
+  group: 'Gemini 2.5'
 }
 
 // Custom initial providers
