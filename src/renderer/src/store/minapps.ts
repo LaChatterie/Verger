@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { DEFAULT_MIN_APPS } from '@renderer/config/minapps'
+import { CUSTOM_DEFAULT_MINAPPS } from '@renderer/config/custom-config'
 import { MinAppType, SidebarIcon } from '@renderer/types'
 
 export const DEFAULT_SIDEBAR_ICONS: SidebarIcon[] = [
@@ -18,8 +19,11 @@ export interface MinAppsState {
   pinned: MinAppType[]
 }
 
+// Use custom MiniApps if defined, otherwise use defaults
+const DEFAULT_APPS = CUSTOM_DEFAULT_MINAPPS || DEFAULT_MIN_APPS
+
 const initialState: MinAppsState = {
-  enabled: DEFAULT_MIN_APPS,
+  enabled: DEFAULT_APPS,
   disabled: [],
   pinned: []
 }

@@ -14,9 +14,10 @@ You can customize the following settings:
 - **CUSTOM_DEFAULT_MODEL**: Set the default model for new conversations
 - **CUSTOM_TOPIC_NAMING_MODEL**: Set the model used for generating topic names
 - **CUSTOM_TRANSLATE_MODEL**: Set the model used for translations
-- **CUSTOM_INITIAL_PROVIDERS**: Configure which providers are available and enabled by default
+- **CUSTOM_INITIAL_PROVIDERS**: Configure which providers are available and enabled by default. These providers will be listed first, followed by any other providers not explicitly defined, sorted alphabetically by name
 - **CUSTOM_TOPIC_NAMING_PROMPT**: Set a custom prompt for generating topic names
 - **CUSTOM_SETTINGS**: Override any application settings
+- **CUSTOM_DEFAULT_MINAPPS**: Override the default MiniApp list
 
 ## How to Use
 
@@ -53,7 +54,7 @@ The repository includes a GitHub workflow that uses your custom configuration:
 
 ```typescript
 // custom-config.ts
-import { Model, Provider } from '@renderer/types'
+import { MinAppType, Model, Provider } from '@renderer/types'
 
 // Custom system models
 export const CUSTOM_SYSTEM_MODELS: Record<string, Model[]> = {
@@ -101,8 +102,51 @@ export const CUSTOM_DEFAULT_MODEL: Model = {
   group: 'GPT 4o'
 }
 
+// Custom initial providers - these will be listed first, followed by other providers
+export const CUSTOM_INITIAL_PROVIDERS: Provider[] = [
+  {
+    id: 'openrouter',
+    name: 'OpenRouter',
+    type: 'openai',
+    apiKey: '',
+    apiHost: 'https://openrouter.ai/api/v1/',
+    models: CUSTOM_SYSTEM_MODELS.openrouter,
+    isSystem: true,
+    enabled: true
+  },
+  {
+    id: 'anthropic',
+    name: 'Anthropic',
+    type: 'anthropic',
+    apiKey: '',
+    apiHost: 'https://api.anthropic.com/',
+    models: CUSTOM_SYSTEM_MODELS.anthropic,
+    isSystem: true,
+    enabled: true
+  }
+]
+
 // Custom topic naming prompt
 export const CUSTOM_TOPIC_NAMING_PROMPT = 'Generate an English title with 10 characters or less'
+
+// Custom default MiniApps
+export const CUSTOM_DEFAULT_MINAPPS: MinAppType[] = [
+  {
+    id: 'openai',
+    name: 'ChatGPT',
+    url: 'https://chatgpt.com/'
+  },
+  {
+    id: 'anthropic',
+    name: 'Claude',
+    url: 'https://claude.ai/'
+  },
+  {
+    id: 'gemini',
+    name: 'Gemini',
+    url: 'https://gemini.google.com/'
+  }
+]
 ```
 
 ## Advantages
@@ -131,3 +175,6 @@ The configuration is applied in the following files:
 - `src/renderer/src/config/models.ts`: Uses the `CUSTOM_SYSTEM_MODELS` constant
 - `src/renderer/src/store/llm.ts`: Uses the `CUSTOM_DEFAULT_MODEL`, `CUSTOM_TOPIC_NAMING_MODEL`, `CUSTOM_TRANSLATE_MODEL`, and `CUSTOM_INITIAL_PROVIDERS` constants
 - `src/renderer/src/store/settings.ts`: Uses the `CUSTOM_SETTINGS` and `CUSTOM_TOPIC_NAMING_PROMPT` constants
+- `src/renderer/src/store/minapps.ts`: Uses the `CUSTOM_DEFAULT_MINAPPS` constant
+- `src/renderer/src/components/Icons/MinAppIcon.tsx`: Uses the `CUSTOM_DEFAULT_MINAPPS` constant
+- `src/renderer/src/pages/settings/MiniappSettings/MiniAppSettings.tsx`: Uses the `CUSTOM_DEFAULT_MINAPPS` constant

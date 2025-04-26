@@ -1,4 +1,5 @@
 import { DEFAULT_MIN_APPS } from '@renderer/config/minapps'
+import { CUSTOM_DEFAULT_MINAPPS } from '@renderer/config/custom-config'
 import { MinAppType } from '@renderer/types'
 import { FC } from 'react'
 import styled from 'styled-components'
@@ -11,7 +12,9 @@ interface Props {
 }
 
 const MinAppIcon: FC<Props> = ({ app, size = 48, style, sidebar = false }) => {
-  const _app = DEFAULT_MIN_APPS.find((item) => item.id === app.id)
+  // Use custom MiniApps if defined, otherwise use defaults
+  const ALL_APPS = CUSTOM_DEFAULT_MINAPPS || DEFAULT_MIN_APPS
+  const _app = ALL_APPS.find((item) => item.id === app.id)
 
   if (!_app) {
     return null

@@ -3,3 +3,4 @@
 
 # Ignore nightly-build.yml in merges
 .github/workflows/nightly-build.yml merge=ours
+README.md merge=ours

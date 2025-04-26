@@ -2,7 +2,16 @@
 // This file contains custom configuration for Verger
 // Edit this file to customize your settings
 
-import { Model, Provider } from '@renderer/types'
+// Import app logos
+import AbacusLogo from '@renderer/assets/images/apps/abacus.webp?url'
+import AIStudioLogo from '@renderer/assets/images/apps/aistudio.svg?url'
+import GeminiAppLogo from '@renderer/assets/images/apps/gemini.webp?url'
+import LeChatLogo from '@renderer/assets/images/apps/lechat.png?url'
+import NotebookLMAppLogo from '@renderer/assets/images/apps/notebooklm.svg?url'
+import YouLogo from '@renderer/assets/images/apps/you.jpg?url'
+import ClaudeAppLogo from '@renderer/assets/images/models/claude.png?url'
+import OpenAiProviderLogo from '@renderer/assets/images/providers/openai.png?url'
+import { MinAppType, Model, Provider } from '@renderer/types'
 
 // Custom system models
 export const CUSTOM_SYSTEM_MODELS: Record<string, Model[]> = {
@@ -122,6 +131,24 @@ export const CUSTOM_SYSTEM_MODELS: Record<string, Model[]> = {
       group: 'google'
     },
     {
+      id: 'meta/llama-4-maverick:free',
+      provider: 'openrouter',
+      name: 'Meta: Llama 4 Maverick',
+      group: 'meta'
+    },
+    {
+      id: 'meta/llama-4-scout:free',
+      provider: 'openrouter',
+      name: 'Meta: Llama 4 Scout',
+      group: 'meta'
+    },
+    {
+      id: 'microsoft/mai-ds-r1:free',
+      provider: 'openrouter',
+      name: 'DeepSeek R1 (uncensored, free)',
+      group: 'Deepseek'
+    },
+    {
       id: 'mistralai/mistral-7b-instruct:free',
       provider: 'openrouter',
       name: 'Mistral: Mistral 7B Instruct',
@@ -169,15 +196,15 @@ export const CUSTOM_DEFAULT_MODEL: Model = {
   id: 'google/gemini-2.5-flash-preview',
   provider: 'openrouter',
   name: 'Google: Gemini 2.5 Flash Preview',
-  group: 'google'
+  group: 'Gemini 2.5'
 }
 
 // Custom topic naming model
 export const CUSTOM_TOPIC_NAMING_MODEL: Model = {
-  id: 'gpt-4.1-mini',
-  name: 'GPT 4.1 mini',
-  provider: 'openai',
-  group: 'GPT 4o'
+  id: 'google/gemini-2.5-flash-preview',
+  provider: 'openrouter',
+  name: 'Google: Gemini 2.5 Flash Preview',
+  group: 'Gemini 2.5'
 }
 
 // Custom translate model
@@ -198,7 +225,7 @@ export const CUSTOM_INITIAL_PROVIDERS: Provider[] = [
     apiHost: 'https://openrouter.ai/api/v1/',
     models: CUSTOM_SYSTEM_MODELS.openrouter,
     isSystem: true,
-    enabled: false
+    enabled: true
   },
   {
     id: 'anthropic',
@@ -208,7 +235,17 @@ export const CUSTOM_INITIAL_PROVIDERS: Provider[] = [
     apiHost: 'https://api.anthropic.com/',
     models: CUSTOM_SYSTEM_MODELS.anthropic,
     isSystem: true,
-    enabled: false
+    enabled: true
+  },
+  {
+    id: 'mistral',
+    name: 'Mistral',
+    type: 'openai',
+    apiKey: '',
+    apiHost: 'https://api.mistral.ai',
+    models: CUSTOM_SYSTEM_MODELS.mistral,
+    isSystem: true,
+    enabled: true
   },
   {
     id: 'openai',
@@ -217,6 +254,36 @@ export const CUSTOM_INITIAL_PROVIDERS: Provider[] = [
     apiKey: '',
     apiHost: 'https://api.openai.com',
     models: CUSTOM_SYSTEM_MODELS.openai,
+    isSystem: true,
+    enabled: true
+  },
+  {
+    id: 'gemini',
+    name: 'Gemini',
+    type: 'gemini',
+    apiKey: '',
+    apiHost: 'https://generativelanguage.googleapis.com',
+    models: CUSTOM_SYSTEM_MODELS.gemini,
+    isSystem: true,
+    enabled: true
+  },
+  {
+    id: 'perplexity',
+    name: 'Perplexity',
+    type: 'openai',
+    apiKey: '',
+    apiHost: 'https://api.perplexity.ai/',
+    models: CUSTOM_SYSTEM_MODELS.perplexity,
+    isSystem: true,
+    enabled: true
+  },
+  {
+    id: 'groq',
+    name: 'Groq',
+    type: 'openai',
+    apiKey: '',
+    apiHost: 'https://api.groq.com/openai',
+    models: CUSTOM_SYSTEM_MODELS.groq,
     isSystem: true,
     enabled: false
   },
@@ -230,26 +297,6 @@ export const CUSTOM_INITIAL_PROVIDERS: Provider[] = [
     models: CUSTOM_SYSTEM_MODELS['azure-openai'],
     isSystem: true,
     enabled: false
-  },
-  {
-    id: 'gemini',
-    name: 'Gemini',
-    type: 'gemini',
-    apiKey: '',
-    apiHost: 'https://generativelanguage.googleapis.com',
-    models: CUSTOM_SYSTEM_MODELS.gemini,
-    isSystem: true,
-    enabled: false
-  },
-  {
-    id: 'groq',
-    name: 'Groq',
-    type: 'openai',
-    apiKey: '',
-    apiHost: 'https://api.groq.com/openai',
-    models: CUSTOM_SYSTEM_MODELS.groq,
-    isSystem: true,
-    enabled: false
   }
 ]
 
@@ -258,3 +305,61 @@ export const CUSTOM_TOPIC_NAMING_PROMPT = 'Generate an English title with 10 cha
 
 // Custom settings
 export const CUSTOM_SETTINGS = undefined // Set to an object to override default settings
+
+// Custom default MiniApps
+// Set to an array of MinAppType to override the default MiniApp list
+// Leave as undefined to use the system defaults
+// Example:
+export const CUSTOM_DEFAULT_MINAPPS: MinAppType[] = [
+  {
+    id: 'openai',
+    name: 'ChatGPT',
+    url: 'https://chatgpt.com/',
+    logo: OpenAiProviderLogo,
+    bodered: true
+  },
+  {
+    id: 'anthropic',
+    name: 'Claude',
+    url: 'https://claude.ai/',
+    logo: ClaudeAppLogo
+  },
+  {
+    id: 'gemini',
+    name: 'Gemini',
+    url: 'https://gemini.google.com/',
+    logo: GeminiAppLogo
+  },
+  {
+    id: 'aistudio',
+    name: 'AI Studio',
+    logo: AIStudioLogo,
+    url: 'https://aistudio.google.com/'
+  },
+  {
+    id: 'lechat',
+    name: 'LeChat',
+    logo: LeChatLogo,
+    url: 'https://chat.mistral.ai/chat',
+    bodered: true
+  },
+  {
+    id: 'notebooklm',
+    name: 'NotebookLM',
+    logo: NotebookLMAppLogo,
+    url: 'https://notebooklm.google.com/'
+  },
+  {
+    id: 'abacus',
+    name: 'Abacus',
+    logo: AbacusLogo,
+    url: 'https://apps.abacus.ai/chatllm',
+    bodered: true
+  },
+  {
+    id: 'you',
+    name: 'You',
+    logo: YouLogo,
+    url: 'https://you.com/'
+  }
+]

@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { isLocalAi } from '@renderer/config/env'
 import {
   CUSTOM_DEFAULT_MODEL,
   CUSTOM_INITIAL_PROVIDERS,
   CUSTOM_TOPIC_NAMING_MODEL,
   CUSTOM_TRANSLATE_MODEL
 } from '@renderer/config/custom-config'
+import { isLocalAi } from '@renderer/config/env'
 import { SYSTEM_MODELS } from '@renderer/config/models'
 import { Model, Provider } from '@renderer/types'
 import { IpcChannel } from '@shared/IpcChannel'
@@ -487,8 +487,28 @@ const DEFAULT_INITIAL_PROVIDERS: Provider[] = [
   }
 ]
 
-// Export with potential override from custom configuration
-export const INITIAL_PROVIDERS = CUSTOM_INITIAL_PROVIDERS || DEFAULT_INITIAL_PROVIDERS
+// Function to merge custom providers with default providers
+// Custom providers come first, followed by remaining default providers in alphabetical order
+const mergeProviders = (customProviders: Provider[] | undefined, defaultProviders: Provider[]): Provider[] => {
+  if (!customProviders || customProviders.length === 0) {
+    return defaultProviders
+  }
+
+  // Get the IDs of custom providers
+  const customProviderIds = customProviders.map((provider) => provider.id)
+
+  // Filter out default providers that are already in custom providers
+  const remainingDefaultProviders = defaultProviders.filter((provider) => !customProviderIds.includes(provider.id))
+
+  // Sort remaining default providers alphabetically by name
+  const sortedRemainingProviders = [...remainingDefaultProviders].sort((a, b) => a.name.localeCompare(b.name))
+
+  // Return custom providers followed by sorted remaining default providers
+  return [...customProviders, ...sortedRemainingProviders]
+}
+
+// Export merged providers with custom providers first
+export const INITIAL_PROVIDERS = mergeProviders(CUSTOM_INITIAL_PROVIDERS, DEFAULT_INITIAL_PROVIDERS)
 
 // Original initial state definition
 const DEFAULT_INITIAL_STATE: LlmState = {
