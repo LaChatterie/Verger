@@ -1,7 +1,7 @@
+import { mapLanguageVariant } from '@renderer/utils/languageMapping'
 import { defaultLanguage } from '@shared/config/constant'
 import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
-import { mapLanguageVariant, SUPPORTED_LANGUAGES } from '@renderer/utils/languageMapping'
 
 // Original translation
 import enUS from './locales/en-us.json'

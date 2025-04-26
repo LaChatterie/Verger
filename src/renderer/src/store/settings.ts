@@ -238,7 +238,22 @@ const DEFAULT_INITIAL_STATE: SettingsState = {
 }
 
 // Export with potential override from custom configuration
-export const initialState: SettingsState = CUSTOM_SETTINGS || DEFAULT_INITIAL_STATE
+const mergedSettings = { ...DEFAULT_INITIAL_STATE }
+
+// Apply custom settings if available
+if (CUSTOM_SETTINGS) {
+  // Handle sidebar icons specially to maintain type safety
+  if (CUSTOM_SETTINGS.sidebarIcons) {
+    if (CUSTOM_SETTINGS.sidebarIcons.visible) {
+      mergedSettings.sidebarIcons.visible = CUSTOM_SETTINGS.sidebarIcons.visible as SidebarIcon[]
+    }
+    if (CUSTOM_SETTINGS.sidebarIcons.disabled) {
+      mergedSettings.sidebarIcons.disabled = CUSTOM_SETTINGS.sidebarIcons.disabled as SidebarIcon[]
+    }
+  }
+}
+
+export const initialState: SettingsState = mergedSettings
 
 // Apply custom topic naming prompt if available
 if (CUSTOM_TOPIC_NAMING_PROMPT && !initialState.topicNamingPrompt) {

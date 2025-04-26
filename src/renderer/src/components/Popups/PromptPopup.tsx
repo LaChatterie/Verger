@@ -1,6 +1,7 @@
 import { Input, Modal } from 'antd'
 import { TextAreaProps } from 'antd/es/input'
 import { useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import { Box } from '../Layout'
 import { TopView } from '../TopView'
@@ -25,6 +26,7 @@ const PromptPopupContainer: React.FC<Props> = ({
   inputProps = {},
   resolve
 }) => {
+  const { t } = useTranslation()
   const [value, setValue] = useState(defaultValue)
   const [open, setOpen] = useState(true)
   const textAreaRef = useRef<any>(null)
@@ -74,7 +76,7 @@ const PromptPopupContainer: React.FC<Props> = ({
         onChange={(e) => setValue(e.target.value)}
         allowClear
         onKeyDown={(e) => {
-          const isEnterPressed = e.keyCode === 13
+          const isEnterPressed = e.key === 'Enter'
           if (isEnterPressed && !e.shiftKey && !e.ctrlKey && !e.metaKey) {
             e.preventDefault()
             onOk()

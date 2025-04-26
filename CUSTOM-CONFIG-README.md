@@ -17,7 +17,7 @@ You can customize the following settings:
 - **CUSTOM_INITIAL_PROVIDERS**: Configure which providers are available and enabled by default. These providers will be listed first, followed by any other providers not explicitly defined, sorted alphabetically by name
 - **CUSTOM_TOPIC_NAMING_PROMPT**: Set a custom prompt for generating topic names
 - **CUSTOM_SETTINGS**: Override any application settings
-- **CUSTOM_DEFAULT_MINAPPS**: Override the default MiniApp list
+- **CUSTOM_DEFAULT_MINAPPS**: Set a list of MiniApp IDs to be displayed first, followed by all other non-Chinese MiniApps
 
 ## How to Use
 
@@ -130,23 +130,9 @@ export const CUSTOM_INITIAL_PROVIDERS: Provider[] = [
 export const CUSTOM_TOPIC_NAMING_PROMPT = 'Generate an English title with 10 characters or less'
 
 // Custom default MiniApps
-export const CUSTOM_DEFAULT_MINAPPS: MinAppType[] = [
-  {
-    id: 'openai',
-    name: 'ChatGPT',
-    url: 'https://chatgpt.com/'
-  },
-  {
-    id: 'anthropic',
-    name: 'Claude',
-    url: 'https://claude.ai/'
-  },
-  {
-    id: 'gemini',
-    name: 'Gemini',
-    url: 'https://gemini.google.com/'
-  }
-]
+// Set to an array of MinApp IDs to be listed first in order
+// The system will include all other non-Chinese MinApps after these
+export const CUSTOM_DEFAULT_MINAPPS: string[] = ['openai', 'anthropic', 'gemini', 'lechat', 'aistudio', 'notebooklm']
 ```
 
 ## Advantages

@@ -9,7 +9,6 @@ import {
   ReloadOutlined
 } from '@ant-design/icons'
 import { isMac, isWindows } from '@renderer/config/constant'
-import { DEFAULT_MIN_APPS } from '@renderer/config/minapps'
 import { useBridge } from '@renderer/hooks/useBridge'
 import { useMinappPopup } from '@renderer/hooks/useMinappPopup'
 import { useMinapps } from '@renderer/hooks/useMinapps'
@@ -137,7 +136,7 @@ const MinappPopupContainer: React.FC = () => {
       (acc, app) => ({
         ...acc,
         [app.id]: {
-          canPinned: DEFAULT_MIN_APPS.some((item) => item.id === app.id),
+          canPinned: true, // All apps can be pinned now
           isPinned: pinned.some((item) => item.id === app.id),
           canOpenExternalLink: app.url.startsWith('http://') || app.url.startsWith('https://')
         }

@@ -3,15 +3,7 @@
 // Edit this file to customize your settings
 
 // Import app logos
-import AbacusLogo from '@renderer/assets/images/apps/abacus.webp?url'
-import AIStudioLogo from '@renderer/assets/images/apps/aistudio.svg?url'
-import GeminiAppLogo from '@renderer/assets/images/apps/gemini.png?url'
-import LeChatLogo from '@renderer/assets/images/apps/lechat.png?url'
-import NotebookLMAppLogo from '@renderer/assets/images/apps/notebooklm.svg?url'
-import YouLogo from '@renderer/assets/images/apps/you.jpg?url'
-import ClaudeAppLogo from '@renderer/assets/images/models/claude.png?url'
-import OpenAiProviderLogo from '@renderer/assets/images/providers/openai.png?url'
-import { MinAppType, Model, Provider } from '@renderer/types'
+import { Model, Provider } from '@renderer/types'
 
 // Custom system models
 export const CUSTOM_SYSTEM_MODELS: Record<string, Model[]> = {
@@ -306,64 +298,22 @@ export const CUSTOM_TOPIC_NAMING_PROMPT = 'Generate an English title with 10 cha
 // Custom settings
 export const CUSTOM_SETTINGS = {
   sidebarIcons: {
-    visible: ['assistants', 'agents', 'translate', 'minapp', 'knowledge', 'files']
+    visible: ['assistants', 'agents', 'translate', 'minapp', 'knowledge', 'files'],
+    disabled: ['paintings']
   }
 } // Override default settings to hide paintings
 
 // Custom default MiniApps
-// Set to an array of MinAppType to override the default MiniApp list
-// Leave as undefined to use the system defaults
-// Example:
-export const CUSTOM_DEFAULT_MINAPPS: MinAppType[] = [
-  {
-    id: 'anthropic',
-    name: 'Claude',
-    url: 'https://claude.ai/',
-    logo: ClaudeAppLogo
-  },
-  {
-    id: 'gemini',
-    name: 'Gemini',
-    url: 'https://gemini.google.com/',
-    logo: GeminiAppLogo
-  },
-  {
-    id: 'openai',
-    name: 'ChatGPT',
-    url: 'https://chatgpt.com/',
-    logo: OpenAiProviderLogo,
-    bodered: true
-  },
-  {
-    id: 'lechat',
-    name: 'LeChat',
-    logo: LeChatLogo,
-    url: 'https://chat.mistral.ai/chat',
-    bodered: true
-  },
-  {
-    id: 'aistudio',
-    name: 'AI Studio',
-    logo: AIStudioLogo,
-    url: 'https://aistudio.google.com/'
-  },
-  {
-    id: 'notebooklm',
-    name: 'NotebookLM',
-    logo: NotebookLMAppLogo,
-    url: 'https://notebooklm.google.com/'
-  },
-  {
-    id: 'abacus',
-    name: 'Abacus',
-    logo: AbacusLogo,
-    url: 'https://apps.abacus.ai/chatllm',
-    bodered: true
-  },
-  {
-    id: 'you',
-    name: 'You',
-    logo: YouLogo,
-    url: 'https://you.com/'
-  }
+// Set to an array of MinApp IDs to be listed first in order
+// The system will include all other non-Chinese MinApps after these
+export const CUSTOM_DEFAULT_MINAPPS = [
+  'anthropic',
+  'gemini',
+  'openai',
+  'lechat',
+  'perplexity',
+  'aistudio',
+  'notebooklm',
+  'abacus',
+  'you'
 ]

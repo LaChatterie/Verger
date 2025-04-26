@@ -64,7 +64,7 @@ const GeneralSettings: FC = () => {
 
   const onSelectLanguage = (value: LanguageVarious) => {
     // Map language variants (e.g., "en-GB" to "en-US") before setting
-    const mappedLanguage = mapLanguageVariant(value)
+    const mappedLanguage = mapLanguageVariant(value) as LanguageVarious
     dispatch(setLanguage(mappedLanguage))
     localStorage.setItem('language', mappedLanguage)
     window.api.setLanguage(mappedLanguage)

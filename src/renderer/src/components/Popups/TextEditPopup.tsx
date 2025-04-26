@@ -71,6 +71,7 @@ const PopupContainer: React.FC<Props> = ({ text, textareaProps, modalProps, reso
       style={{ maxHeight: '70vh' }}
       transitionName="animation-move-down"
       okText={t('common.save')}
+      cancelText={t('common.cancel')}
       {...modalProps}
       open={open}
       onOk={onOk}
