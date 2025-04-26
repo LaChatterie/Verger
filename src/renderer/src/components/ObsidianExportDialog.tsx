@@ -316,7 +316,8 @@ const ObsidianExportDialog: React.FC<ObsidianExportDialogProps> = ({
         type: 'primary',
         disabled: vaults.length === 0 || loading || !!error
       }}
-      okText={i18n.t('chat.topics.export.obsidian_btn')}>
+      okText={i18n.t('chat.topics.export.obsidian_btn')}
+      cancelText={i18n.t('common.cancel')}>
       {error && <Alert message={error} type="error" showIcon style={{ marginBottom: 16 }} />}
 
       <Form layout="horizontal" labelCol={{ span: 6 }} wrapperCol={{ span: 18 }} labelAlign="left">

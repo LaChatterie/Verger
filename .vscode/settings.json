@@ -52,5 +52,17 @@
       "icon": "terminal-powershell",
       "args": ["-NoExit", "-Command", "$env:PATH = 'C:\\Program Files\\nodejs20;' + $env:PATH; node --version"]
     }
-  }
+  },
+
+  // Debug configuration
+  "debug.onTaskErrors": "debugAnyway",
+  "debug.javascript.autoAttachFilter": "smart",
+  "debug.javascript.terminalOptions": {
+    "skipFiles": ["<node_internals>/**"]
+  },
+  "debug.internalConsoleOptions": "neverOpen",
+  "debug.toolBarLocation": "docked",
+  "debug.showBreakpointsInOverviewRuler": true,
+  "debug.terminal.clearBeforeReusing": true,
+  "task.problemMatchers.neverPrompt": true
 }

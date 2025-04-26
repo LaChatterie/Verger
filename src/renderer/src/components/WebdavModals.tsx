@@ -76,6 +76,8 @@ export function WebdavBackupModal({
       open={isModalVisible}
       onOk={handleBackup}
       onCancel={handleCancel}
+      okText={t('common.confirm')}
+      cancelText={t('common.cancel')}
       okButtonProps={{ loading: backuping }}>
       <Input
         value={customFileName}
@@ -205,6 +207,8 @@ export function WebdavRestoreModal({
       open={isRestoreModalVisible}
       onOk={handleRestore}
       onCancel={handleCancel}
+      okText={t('common.confirm')}
+      cancelText={t('common.cancel')}
       okButtonProps={{ loading: restoring }}
       width={600}>
       <div style={{ position: 'relative' }}>

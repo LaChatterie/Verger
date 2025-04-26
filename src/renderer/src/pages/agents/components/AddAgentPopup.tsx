@@ -139,6 +139,7 @@ const PopupContainer: React.FC<Props> = ({ resolve }) => {
       onCancel={onCancel}
       maskClosable={false}
       afterClose={onClose}
+      cancelText={t('common.cancel')}
       okText={t('agents.add.title')}
       width={800}
       centered>

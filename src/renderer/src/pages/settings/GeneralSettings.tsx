@@ -2,6 +2,7 @@ import { useTheme } from '@renderer/context/ThemeProvider'
 import { useSettings } from '@renderer/hooks/useSettings'
 import i18n from '@renderer/i18n'
 import { useAppDispatch } from '@renderer/store'
+import { mapLanguageVariant } from '@renderer/utils/languageMapping'
 import { setEnableDataCollection, setLanguage } from '@renderer/store/settings'
 import { setProxyMode, setProxyUrl as _setProxyUrl } from '@renderer/store/settings'
 import { LanguageVarious } from '@renderer/types'
@@ -62,10 +63,12 @@ const GeneralSettings: FC = () => {
   const { t } = useTranslation()
 
   const onSelectLanguage = (value: LanguageVarious) => {
-    dispatch(setLanguage(value))
-    localStorage.setItem('language', value)
-    window.api.setLanguage(value)
-    i18n.changeLanguage(value)
+    // Map language variants (e.g., "en-GB" to "en-US") before setting
+    const mappedLanguage = mapLanguageVariant(value)
+    dispatch(setLanguage(mappedLanguage))
+    localStorage.setItem('language', mappedLanguage)
+    window.api.setLanguage(mappedLanguage)
+    i18n.changeLanguage(mappedLanguage)
   }
 
   const onSetProxyUrl = () => {

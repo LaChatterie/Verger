@@ -63,6 +63,8 @@ const PromptPopupContainer: React.FC<Props> = ({
       onCancel={onCancel}
       afterClose={onClose}
       afterOpenChange={handleAfterOpenChange}
+      okText={t('common.confirm')}
+      cancelText={t('common.cancel')}
       centered>
       <Box mb={8}>{message}</Box>
       <Input.TextArea

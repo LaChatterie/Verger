@@ -22,7 +22,40 @@
       },
       "preLaunchTask": "Start Dev Server",
       "outputCapture": "std",
-      "console": "integratedTerminal"
+      "console": "integratedTerminal",
+      "autoAttachChildProcesses": true,
+      "internalConsoleOptions": "neverOpen",
+      "skipFiles": ["<node_internals>/**"],
+      "presentation": {
+        "hidden": false,
+        "group": "Debug",
+        "order": 1
+      },
+      "serverReadyAction": {
+        "pattern": "ready|Dev server running at:",
+        "uriFormat": "http://localhost:3000",
+        "action": "debugWithChrome"
+      }
+    },
+    {
+      "name": "Attach to Renderer",
+      "type": "chrome",
+      "request": "attach",
+      "port": 9222,
+      "webRoot": "${workspaceFolder}",
+      "timeout": 30000
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Debug All",
+      "configurations": ["Debug Main Process", "Attach to Renderer"],
+      "stopAll": true,
+      "presentation": {
+        "hidden": false,
+        "group": "Debug",
+        "order": 1
+      }
     }
   ]
 }

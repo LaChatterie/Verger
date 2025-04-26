@@ -316,13 +316,6 @@ export const CUSTOM_SETTINGS = {
 // Example:
 export const CUSTOM_DEFAULT_MINAPPS: MinAppType[] = [
   {
-    id: 'openai',
-    name: 'ChatGPT',
-    url: 'https://chatgpt.com/',
-    logo: OpenAiProviderLogo,
-    bodered: true
-  },
-  {
     id: 'anthropic',
     name: 'Claude',
     url: 'https://claude.ai/',
@@ -335,10 +328,11 @@ export const CUSTOM_DEFAULT_MINAPPS: MinAppType[] = [
     logo: GeminiAppLogo
   },
   {
-    id: 'aistudio',
-    name: 'AI Studio',
-    logo: AIStudioLogo,
-    url: 'https://aistudio.google.com/'
+    id: 'openai',
+    name: 'ChatGPT',
+    url: 'https://chatgpt.com/',
+    logo: OpenAiProviderLogo,
+    bodered: true
   },
   {
     id: 'lechat',
@@ -346,6 +340,12 @@ export const CUSTOM_DEFAULT_MINAPPS: MinAppType[] = [
     logo: LeChatLogo,
     url: 'https://chat.mistral.ai/chat',
     bodered: true
+  },
+  {
+    id: 'aistudio',
+    name: 'AI Studio',
+    logo: AIStudioLogo,
+    url: 'https://aistudio.google.com/'
   },
   {
     id: 'notebooklm',
