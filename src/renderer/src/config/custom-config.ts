@@ -113,25 +113,31 @@ export const CUSTOM_SYSTEM_MODELS: Record<string, Model[]> = {
     {
       id: 'google/gemini-2.5-flash-preview',
       provider: 'openrouter',
-      name: 'Google: Gemini 2.5 Flash Preview',
+      name: 'Gemini 2.5 Flash',
       group: 'google'
     },
     {
       id: 'google/gemini-2.5-pro-preview',
       provider: 'openrouter',
-      name: 'Google: Gemini 2.5 Pro Preview',
+      name: 'Gemini 2.5 Pro',
       group: 'google'
+    },
+    {
+      id: 'anthropic/claude-3.7-sonnet',
+      provider: 'openrouter',
+      name: 'Claude Sonnet',
+      group: 'anthropic'
     },
     {
       id: 'meta/llama-4-maverick:free',
       provider: 'openrouter',
-      name: 'Meta: Llama 4 Maverick',
+      name: 'Llama Maverick (free)',
       group: 'meta'
     },
     {
       id: 'meta/llama-4-scout:free',
       provider: 'openrouter',
-      name: 'Meta: Llama 4 Scout',
+      name: 'Meta: Llama Scout (free)',
       group: 'meta'
     },
     {
@@ -143,7 +149,7 @@ export const CUSTOM_SYSTEM_MODELS: Record<string, Model[]> = {
     {
       id: 'mistralai/mistral-7b-instruct:free',
       provider: 'openrouter',
-      name: 'Mistral: Mistral 7B Instruct',
+      name: 'Mistral 7B Instruct',
       group: 'mistralai'
     }
   ],
