@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { CUSTOM_SETTINGS } from '@renderer/config/custom-config'
 import { TRANSLATE_PROMPT } from '@renderer/config/prompts'
 import { CodeStyleVarious, LanguageVarious, MathEngine, ThemeMode, TranslateLanguageVarious } from '@renderer/types'
 import { IpcChannel } from '@shared/IpcChannel'
@@ -133,7 +134,8 @@ export interface SettingsState {
 
 export type MultiModelMessageStyle = 'horizontal' | 'vertical' | 'fold' | 'grid'
 
-export const initialState: SettingsState = {
+// Original initial state definition
+const DEFAULT_INITIAL_STATE: SettingsState = {
   showAssistants: true,
   showTopics: true,
   sendMessageShortcut: 'Enter',
@@ -177,7 +179,7 @@ export const initialState: SettingsState = {
   webdavHost: '',
   webdavUser: '',
   webdavPass: '',
-  webdavPath: '/cherry-studio',
+  webdavPath: '/verger',
   webdavAutoSync: false,
   webdavSyncInterval: 0,
   webdavMaxBackups: 0,
@@ -234,6 +236,24 @@ export const initialState: SettingsState = {
     docx: true
   }
 }
+
+// Export with potential override from custom configuration
+const mergedSettings = { ...DEFAULT_INITIAL_STATE }
+
+// Apply custom settings if available
+if (CUSTOM_SETTINGS) {
+  // Handle sidebar icons specially to maintain type safety
+  if (CUSTOM_SETTINGS.sidebarIcons) {
+    if (CUSTOM_SETTINGS.sidebarIcons.visible) {
+      mergedSettings.sidebarIcons.visible = CUSTOM_SETTINGS.sidebarIcons.visible as SidebarIcon[]
+    }
+    if (CUSTOM_SETTINGS.sidebarIcons.disabled) {
+      mergedSettings.sidebarIcons.disabled = CUSTOM_SETTINGS.sidebarIcons.disabled as SidebarIcon[]
+    }
+  }
+}
+
+export const initialState: SettingsState = mergedSettings
 
 const settingsSlice = createSlice({
   name: 'settings',

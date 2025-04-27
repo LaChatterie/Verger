@@ -3,6 +3,7 @@ import { LanguageVarious, Shortcut, ThemeMode } from '@types'
 import { app } from 'electron'
 import Store from 'electron-store'
 
+import { mapLanguageVariant } from '../utils/languageMapping'
 import { locales } from '../utils/locales'
 
 enum ConfigKeys {
@@ -29,11 +30,15 @@ export class ConfigManager {
 
   getLanguage(): LanguageVarious {
     const locale = Object.keys(locales).includes(app.getLocale()) ? app.getLocale() : defaultLanguage
-    return this.get(ConfigKeys.Language, locale) as LanguageVarious
+    const storedLanguage = this.get(ConfigKeys.Language, locale) as LanguageVarious
+    // Map language variants (e.g., "en-GB" to "en-US") to supported languages
+    return mapLanguageVariant(storedLanguage) as LanguageVarious
   }
 
-  setLanguage(theme: LanguageVarious) {
-    this.set(ConfigKeys.Language, theme)
+  setLanguage(language: LanguageVarious) {
+    // Map language variants (e.g., "en-GB" to "en-US") before storing
+    const mappedLanguage = mapLanguageVariant(language) as LanguageVarious
+    this.set(ConfigKeys.Language, mappedLanguage)
   }
 
   getTheme(): ThemeMode {
@@ -61,7 +66,7 @@ export class ConfigManager {
   }
 
   getTray(): boolean {
-    return !!this.get(ConfigKeys.Tray, true)
+    return !!this.get(ConfigKeys.Tray, false)
   }
 
   setTray(value: boolean) {
@@ -70,7 +75,7 @@ export class ConfigManager {
   }
 
   getTrayOnClose(): boolean {
-    return !!this.get(ConfigKeys.TrayOnClose, true)
+    return !!this.get(ConfigKeys.TrayOnClose, false)
   }
 
   setTrayOnClose(value: boolean) {
@@ -139,7 +144,7 @@ export class ConfigManager {
   }
 
   getAutoUpdate(): boolean {
-    return this.get<boolean>(ConfigKeys.AutoUpdate, true)
+    return this.get<boolean>(ConfigKeys.AutoUpdate, false)
   }
 
   setAutoUpdate(value: boolean) {
@@ -147,7 +152,7 @@ export class ConfigManager {
   }
 
   getEnableDataCollection(): boolean {
-    return this.get<boolean>(ConfigKeys.EnableDataCollection, true)
+    return this.get<boolean>(ConfigKeys.EnableDataCollection, false)
   }
 
   setEnableDataCollection(value: boolean) {

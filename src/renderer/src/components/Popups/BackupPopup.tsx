@@ -69,6 +69,7 @@ const PopupContainer: React.FC<Props> = ({ resolve }) => {
       okButtonProps={{ disabled: isDisabled }}
       cancelButtonProps={{ disabled: isDisabled }}
       okText={t('backup.confirm.button')}
+      cancelText={t('common.cancel')}
       maskClosable={false}
       centered>
       {!progressData && <div>{t('backup.content')}</div>}

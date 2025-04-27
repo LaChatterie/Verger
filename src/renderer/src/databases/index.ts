@@ -4,7 +4,7 @@ import { Dexie, type EntityTable } from 'dexie'
 import { upgradeToV5 } from './upgrades'
 
 // Database declaration (move this to its own module also)
-export const db = new Dexie('CherryStudio') as Dexie & {
+export const db = new Dexie('Verger') as Dexie & {
   files: EntityTable<FileType, 'id'>
   topics: EntityTable<Pick<Topic, 'id' | 'messages'>, 'id'>
   settings: EntityTable<{ id: string; value: any }, 'id'>

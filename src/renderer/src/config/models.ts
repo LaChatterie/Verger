@@ -134,6 +134,7 @@ import WebSearchService from '@renderer/services/WebSearchService'
 import { Assistant, Model } from '@renderer/types'
 import OpenAI from 'openai'
 
+import { CUSTOM_SYSTEM_MODELS } from './custom-config'
 import { WEB_SEARCH_PROMPT_FOR_OPENROUTER } from './prompts'
 import { getWebSearchTools } from './tools'
 
@@ -374,7 +375,8 @@ export function getModelLogo(modelId: string) {
   return undefined
 }
 
-export const SYSTEM_MODELS: Record<string, Model[]> = {
+// Original system models definition
+const DEFAULT_SYSTEM_MODELS: Record<string, Model[]> = {
   aihubmix: [
     {
       id: 'gpt-4o',
@@ -2486,4 +2488,20 @@ export function groupQwenModels(models: Model[]): Record<string, Model[]> {
     },
     {} as Record<string, Model[]>
   )
+}
+
+// Export with potential override from custom configuration
+// This now uses the build-time generated configuration
+export const SYSTEM_MODELS =
+  Object.keys(CUSTOM_SYSTEM_MODELS).length > 0
+    ? { ...DEFAULT_SYSTEM_MODELS, ...CUSTOM_SYSTEM_MODELS }
+    : DEFAULT_SYSTEM_MODELS
+
+// Log the loaded system models for debugging
+console.log('Loaded SYSTEM_MODELS providers:', Object.keys(SYSTEM_MODELS))
+// Check if the custom models were loaded correctly
+if (Object.keys(CUSTOM_SYSTEM_MODELS).length === 0) {
+  console.warn('WARNING: Using default SYSTEM_MODELS - no custom configuration found')
+} else {
+  console.log('Custom SYSTEM_MODELS configuration applied successfully')
 }

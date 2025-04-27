@@ -183,7 +183,7 @@ const FilesPage: FC = () => {
           {dataSource && dataSource?.length > 0 ? (
             <FileList id={fileType} list={dataSource} files={sortedFiles} />
           ) : (
-            <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+            <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={t('files.empty')} />
           )}
         </MainContent>
       </ContentContainer>
@@ -254,16 +254,21 @@ const SideNav = styled.div`
   }
 `
 
-const SortButton = styled(Button)<{ active?: boolean }>`
+// Create a wrapper component that converts the active prop to a data attribute
+const SortButtonBase = ({ active, ...rest }: { active?: boolean } & React.ComponentProps<typeof Button>) => {
+  return <Button {...rest} data-active={active} />
+}
+
+const SortButton = styled(SortButtonBase)`
   display: flex;
   align-items: center;
   gap: 4px;
   padding: 4px 12px;
   height: 30px;
   border-radius: var(--list-item-border-radius);
-  border: 0.5px solid ${(props) => (props.active ? 'var(--color-border)' : 'transparent')};
-  background-color: ${(props) => (props.active ? 'var(--color-background-soft)' : 'transparent')};
-  color: ${(props) => (props.active ? 'var(--color-text)' : 'var(--color-text-secondary)')};
+  border: 0.5px solid ${(props) => (props['data-active'] ? 'var(--color-border)' : 'transparent')};
+  background-color: ${(props) => (props['data-active'] ? 'var(--color-background-soft)' : 'transparent')};
+  color: ${(props) => (props['data-active'] ? 'var(--color-text)' : 'var(--color-text-secondary)')};
 
   &:hover {
     background-color: var(--color-background-soft);

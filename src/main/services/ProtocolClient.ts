@@ -9,7 +9,7 @@ import Logger from 'electron-log'
 import { handleMcpProtocolUrl } from './urlschema/mcp-install'
 import { windowService } from './WindowService'
 
-export const CHERRY_STUDIO_PROTOCOL = 'cherrystudio'
+export const CHERRY_STUDIO_PROTOCOL = 'verger'
 
 export function registerProtocolClient(app: Electron.App) {
   if (process.defaultApp) {
@@ -18,13 +18,13 @@ export function registerProtocolClient(app: Electron.App) {
     }
   }
 
-  app.setAsDefaultProtocolClient('cherrystudio')
+  app.setAsDefaultProtocolClient('verger')
 }
 
 export function handleProtocolUrl(url: string) {
   if (!url) return
   // Process the URL that was used to open the app
-  // The url will be in the format: cherrystudio://data?param1=value1&param2=value2
+  // The url will be in the format: verger://data?param1=value1&param2=value2
   console.log('Received URL:', url)
 
   // Parse the URL and extract parameters
@@ -50,11 +50,11 @@ export function handleProtocolUrl(url: string) {
 
 const execAsync = promisify(exec)
 
-const DESKTOP_FILE_NAME = 'cherrystudio-url-handler.desktop'
+const DESKTOP_FILE_NAME = 'verger-url-handler.desktop'
 
 /**
  * Sets up deep linking for the AppImage build on Linux by creating a .desktop file.
- * This allows the OS to open cherrystudio:// URLs with this App.
+ * This allows the OS to open verger:// URLs with this App.
  */
 export async function setupAppImageDeepLink(): Promise<void> {
   // Only run on Linux and when packaged as an AppImage
@@ -82,7 +82,7 @@ export async function setupAppImageDeepLink(): Promise<void> {
     // %U allows passing the URL to the application
     // NoDisplay=true hides it from the regular application menu
     const desktopFileContent = `[Desktop Entry]
-Name=Cherry Studio
+Name=Verger
 Exec=${escapePathForExec(appPath)} %U
 Terminal=false
 Type=Application
