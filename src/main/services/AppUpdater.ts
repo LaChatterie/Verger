@@ -20,10 +20,10 @@ export default class AppUpdater {
     autoUpdater.autoDownload = configManager.getAutoUpdate()
     autoUpdater.autoInstallOnAppQuit = configManager.getAutoUpdate()
 
-    // 检测下载错误
+    // Check for download errors
     autoUpdater.on('error', (error) => {
-      // 简单记录错误信息和时间戳
-      logger.error('更新异常', {
+      // Log error information and timestamp
+      logger.error('Update error', {
         message: error.message,
         stack: error.stack,
         time: new Date().toISOString()
@@ -32,25 +32,25 @@ export default class AppUpdater {
     })
 
     autoUpdater.on('update-available', (releaseInfo: UpdateInfo) => {
-      logger.info('检测到新版本', releaseInfo)
+      logger.info('New version detected', releaseInfo)
       mainWindow.webContents.send(IpcChannel.UpdateAvailable, releaseInfo)
     })
 
-    // 检测到不需要更新时
+    // No update available
     autoUpdater.on('update-not-available', () => {
       mainWindow.webContents.send(IpcChannel.UpdateNotAvailable)
     })
 
-    // 更新下载进度
+    // Update download progress
     autoUpdater.on('download-progress', (progress) => {
       mainWindow.webContents.send(IpcChannel.DownloadProgress, progress)
     })
 
-    // 当需要更新的内容下载完成后
+    // Update download completed
     autoUpdater.on('update-downloaded', (releaseInfo: UpdateInfo) => {
       mainWindow.webContents.send(IpcChannel.UpdateDownloaded, releaseInfo)
       this.releaseInfo = releaseInfo
-      logger.info('下载完成', releaseInfo)
+      logger.info('Download completed', releaseInfo)
     })
 
     this.autoUpdater = autoUpdater
@@ -98,11 +98,11 @@ export default class AppUpdater {
     dialog
       .showMessageBox({
         type: 'info',
-        title: '安装更新',
+        title: 'Install Update',
         icon,
-        message: `新版本 ${this.releaseInfo.version} 已准备就绪`,
+        message: `New version ${this.releaseInfo.version} is ready to install`,
         detail: this.formatReleaseNotes(this.releaseInfo.releaseNotes),
-        buttons: ['稍后安装', '立即安装'],
+        buttons: ['Install Later', 'Install Now'],
         defaultId: 1,
         cancelId: 0
       })
@@ -118,7 +118,7 @@ export default class AppUpdater {
 
   private formatReleaseNotes(releaseNotes: string | ReleaseNoteInfo[] | null | undefined): string {
     if (!releaseNotes) {
-      return '暂无更新说明'
+      return 'No release notes available'
     }
 
     if (typeof releaseNotes === 'string') {

@@ -5,6 +5,12 @@
 
 <p align="center">Free desktop AI chat that supports multiple LLM providers</p>
 
+<p align="center">
+  <a href="https://github.com/cmbant/AI-verger/releases/latest">
+    <img src="https://img.shields.io/github/v/release/cmbant/AI-verger?style=flat-square" alt="Latest Release">
+  </a>
+</p>
+
 ## Enhancements
 
 - **Optimized Defaults**: Pre-configured for best uncensored models, longer default context
@@ -47,10 +53,35 @@
 - 📝 Complete Markdown Rendering
 - 🤲 Easy Content Sharing
 
+# 📥 Installation
+
+Click one of the download buttons above to visit the latest release page, where you can download the appropriate version for your platform:
+
+### Windows
+
+- Download the file ending with `-x64-setup.exe` for 64-bit Intel/AMD systems
+- Download the file ending with `-arm64-setup.exe` for ARM-based systems
+
+### macOS
+
+- Download the file ending with `-arm64.dmg` for Apple Silicon (M1/M2/M3) Macs
+- Download the file ending with `-x64.dmg` for Intel Macs
+
+### Linux
+
+- Download the file ending with `-x64.AppImage` for 64-bit Intel/AMD systems
+- Download the file ending with `-arm64.AppImage` for ARM-based systems
+
+### System Requirements
+
+- **Windows**: Windows 10 or later (64-bit)
+- **macOS**: macOS 10.15 or later (Intel or Apple Silicon)
+- **Linux**: Ubuntu 20.04 or later (or equivalent)
+
 # 🖥️ Development
 
 Verger is a fork of [Cherry Studio](https://github.com/CherryHQ/cherry-studio) that maintains the core functionality while adding custom configuration options and optimized default settings. For more detailed information, see the [VERGER-README.md](VERGER-README.md) file.
 
-# 📃 License
+# 📃 Licensing
 
 See the [LICENSE](./LICENSE) file for details.
