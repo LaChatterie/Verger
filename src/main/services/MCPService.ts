@@ -413,7 +413,7 @@ class McpService {
   }
 
   public async getInstallInfo() {
-    const dir = path.join(os.homedir(), '.cherrystudio', 'bin')
+    const dir = path.join(os.homedir(), '.verger', 'bin')
     const uvName = await getBinaryName('uv')
     const bunName = await getBinaryName('bun')
     const uvPath = path.join(dir, uvName)
@@ -693,7 +693,7 @@ class McpService {
         `${homeDir}/.npm-global/bin`,
         `${homeDir}/.yarn/bin`,
         `${homeDir}/.cargo/bin`,
-        `${homeDir}/.cherrystudio/bin`,
+        `${homeDir}/.verger/bin`,
         '/opt/local/bin'
       )
     }
@@ -707,7 +707,7 @@ class McpService {
         `${homeDir}/.npm-global/bin`,
         `${homeDir}/.yarn/bin`,
         `${homeDir}/.cargo/bin`,
-        `${homeDir}/.cherrystudio/bin`,
+        `${homeDir}/.verger/bin`,
         '/snap/bin'
       )
     }
@@ -717,7 +717,7 @@ class McpService {
         `${process.env.APPDATA}\\npm`,
         `${homeDir}\\AppData\\Local\\Yarn\\bin`,
         `${homeDir}\\.cargo\\bin`,
-        `${homeDir}\\.cherrystudio\\bin`
+        `${homeDir}\\.verger\\bin`
       )
     }
 

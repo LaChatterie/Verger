@@ -2,14 +2,14 @@ import { session, shell, webContents } from 'electron'
 
 /**
  * init the useragent of the webview session
- * remove the CherryStudio and Electron from the useragent
+ * remove the Verger and Electron from the useragent
  */
 export function initSessionUserAgent() {
   const wvSession = session.fromPartition('persist:webview')
   const newChromeVersion = '135.0.7049.96'
   const originUA = wvSession.getUserAgent()
   const newUA = originUA
-    .replace(/CherryStudio\/\S+\s/, '')
+    .replace(/Verger\/\S+\s/, '')
     .replace(/Electron\/\S+\s/, '')
     .replace(/Chrome\/\d+\.\d+\.\d+\.\d+/, `Chrome/${newChromeVersion}`)
 

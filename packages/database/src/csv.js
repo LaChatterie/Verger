@@ -3,7 +3,7 @@ const csv = require('csv-parser')
 const sqlite3 = require('sqlite3').verbose()
 
 // 连接到 SQLite 数据库
-const db = new sqlite3.Database('./data/CherryStudio.sqlite3', (err) => {
+const db = new sqlite3.Database('./data/Verger.sqlite3', (err) => {
   if (err) {
     console.error('Error opening database', err)
     return

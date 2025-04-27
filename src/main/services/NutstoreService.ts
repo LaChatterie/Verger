@@ -41,7 +41,7 @@ export async function getNutstoreSSOUrl() {
 export async function decryptToken(token: string) {
   try {
     const decrypted = await decryptSecret({
-      app: 'cherrystudio',
+      app: 'verger',
       s: token
     })
     return JSON.parse(decrypted) as OAuthResponse
