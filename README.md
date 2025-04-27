@@ -1,21 +1,20 @@
 <h1 align="center">
   <img src="https://raw.githubusercontent.com/cmbant/AI-verger/refs/heads/master/build/icon.png" width="150" height="150" alt="banner" /><br>
-  Verger
+  AI Verger
 </h1>
 
-<p align="center">An desktop client that supports multiple LLM providers</p>
+<p align="center">Free desktop AI chat that supports multiple LLM providers</p>
 
 ## Enhancements
 
 - **Optimized Defaults**: Pre-configured for best uncensored models, longer default context
 - **English-Only Interface**: All default content in English
-- **Improved Privacy**: Disabled Sentry error reporting
 
 # 🌟 Key Features
 
 1. **Diverse LLM Provider Support**:
 
-- ☁️ Major LLM Cloud Services: OpenAI, Gemini, Anthropic, and more
+- ☁️ Major LLM Cloud Services: OpenAI, Gemini, Anthropic, Mistral, OpenRouter and more
 - 🔗 AI Web Service Integration: Claude, Peplexity, and others
 - 💻 Local Model Support with Ollama, LM Studio
 
@@ -29,7 +28,7 @@
 - 📄 Support for Text, Images, Office, PDF, and more
 - ☁️ WebDAV File Management and Backup
 - 📊 Mermaid Chart Visualization
-- 💻 Code Syntax Highlighting
+- 💻 Code Syntax Highlighting and maths
 
 4. **Practical Tools Integration**:
 
@@ -54,4 +53,4 @@ Verger is a fork of [Cherry Studio](https://github.com/CherryHQ/cherry-studio) t
 
 # 📃 License
 
-This project is licensed under the same terms as the original Cherry Studio project. See the [LICENSE](./LICENSE) file for details.
+See the [LICENSE](./LICENSE) file for details.

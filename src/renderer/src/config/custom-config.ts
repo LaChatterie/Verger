@@ -291,10 +291,6 @@ export const CUSTOM_INITIAL_PROVIDERS: Provider[] = [
     enabled: false
   }
 ]
-
-// Custom topic naming prompt
-export const CUSTOM_TOPIC_NAMING_PROMPT = 'Generate an English title with 10 characters or less'
-
 // Custom settings
 export const CUSTOM_SETTINGS = {
   sidebarIcons: {

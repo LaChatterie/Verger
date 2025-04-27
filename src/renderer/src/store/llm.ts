@@ -489,6 +489,7 @@ const DEFAULT_INITIAL_PROVIDERS: Provider[] = [
 
 // Function to merge custom providers with default providers
 // Custom providers come first, followed by remaining default providers in alphabetical order
+// Default providers are always disabled by default when added to the merged list
 const mergeProviders = (customProviders: Provider[] | undefined, defaultProviders: Provider[]): Provider[] => {
   if (!customProviders || customProviders.length === 0) {
     return defaultProviders
@@ -501,9 +502,13 @@ const mergeProviders = (customProviders: Provider[] | undefined, defaultProvider
   const remainingDefaultProviders = defaultProviders.filter((provider) => !customProviderIds.includes(provider.id))
 
   // Sort remaining default providers alphabetically by name
-  const sortedRemainingProviders = [...remainingDefaultProviders].sort((a, b) => a.name.localeCompare(b.name))
+  // Also set enabled to false for all default providers that are being added
+  const sortedRemainingProviders = [...remainingDefaultProviders]
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .map((provider) => {
+      return { ...provider, enabled: false }
+    })
 
-  // Return custom providers followed by sorted remaining default providers
   return [...customProviders, ...sortedRemainingProviders]
 }
 

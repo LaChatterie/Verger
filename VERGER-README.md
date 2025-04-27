@@ -21,7 +21,6 @@ Verger includes a custom configuration system that allows you to override defaul
 - **CUSTOM_TOPIC_NAMING_MODEL**: Model used for generating topic names
 - **CUSTOM_TRANSLATE_MODEL**: Model used for translations
 - **CUSTOM_INITIAL_PROVIDERS**: Available providers and their default state
-- **CUSTOM_TOPIC_NAMING_PROMPT**: Custom prompt for generating topic names
 
 See [CUSTOM-CONFIG-README.md](CUSTOM-CONFIG-README.md) for detailed documentation.
 

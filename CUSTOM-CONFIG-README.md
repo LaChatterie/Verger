@@ -15,7 +15,6 @@ You can customize the following settings:
 - **CUSTOM_TOPIC_NAMING_MODEL**: Set the model used for generating topic names
 - **CUSTOM_TRANSLATE_MODEL**: Set the model used for translations
 - **CUSTOM_INITIAL_PROVIDERS**: Configure which providers are available and enabled by default. These providers will be listed first, followed by any other providers not explicitly defined, sorted alphabetically by name
-- **CUSTOM_TOPIC_NAMING_PROMPT**: Set a custom prompt for generating topic names
 - **CUSTOM_SETTINGS**: Override any application settings
 - **CUSTOM_DEFAULT_MINAPPS**: Set a list of MiniApp IDs to be displayed first, followed by all other non-Chinese MiniApps
 
@@ -125,9 +124,6 @@ export const CUSTOM_INITIAL_PROVIDERS: Provider[] = [
     enabled: true
   }
 ]
-
-// Custom topic naming prompt
-export const CUSTOM_TOPIC_NAMING_PROMPT = 'Generate an English title with 10 characters or less'
 
 // Custom default MiniApps
 // Set to an array of MinApp IDs to be listed first in order
