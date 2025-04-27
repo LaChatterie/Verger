@@ -93,10 +93,10 @@ export function filterUsefulMessages(messages: Message[]): Message[] {
 
 export function getContextCount(assistant: Assistant, messages: Message[]) {
   const rawContextCount = assistant?.settings?.contextCount ?? DEFAULT_CONTEXTCOUNT
-  // 使用与 getAssistantSettings 相同的逻辑处理无限上下文
+  // Use the same logic as getAssistantSettings to handle unlimited context
   const maxContextCount = rawContextCount === 20 ? 100000 : rawContextCount
 
-  // 在无限模式下，设置一个合理的高上限而不是处理所有消息
+  // In unlimited mode, set a reasonable high limit instead of processing all messages
   const _messages = rawContextCount === 20 ? takeRight(messages, 1000) : takeRight(messages, maxContextCount)
 
   const clearIndex = _messages.findLastIndex((message) => message.type === 'clear')

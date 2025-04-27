@@ -154,6 +154,8 @@ const PopupContainer: React.FC<Props> = ({ provider, resolve }) => {
       closable={false}
       centered
       title={t('settings.provider.add.title')}
+      okText={t('common.confirm')}
+      cancelText={t('common.cancel')}
       okButtonProps={{ disabled: buttonDisabled }}>
       <Divider style={{ margin: '8px 0' }} />
 

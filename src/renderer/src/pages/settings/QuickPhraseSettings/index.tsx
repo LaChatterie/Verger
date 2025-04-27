@@ -117,6 +117,8 @@ const QuickPhraseSettings: FC = () => {
         open={isModalOpen}
         onOk={handleModalOk}
         onCancel={() => setIsModalOpen(false)}
+        okText={t('common.confirm')}
+        cancelText={t('common.cancel')}
         width={520}>
         <Space direction="vertical" style={{ width: '100%' }} size="middle">
           <div>

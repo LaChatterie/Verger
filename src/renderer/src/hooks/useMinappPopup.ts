@@ -64,10 +64,11 @@ export const useMinappPopup = () => {
     openMinapp(app, true)
   }
 
-  /** Open a minapp by id (look up the minapp in DEFAULT_MIN_APPS) */
+  /** Open a minapp by id (look up the minapp in the combined list) */
   const openMinappById = (id: string, keepAlive: boolean = false) => {
-    import('@renderer/config/minapps').then(({ DEFAULT_MIN_APPS }) => {
-      const app = DEFAULT_MIN_APPS.find((app) => app?.id === id)
+    import('@renderer/store/minapps').then(({ getCombinedMinApps }) => {
+      const apps = getCombinedMinApps()
+      const app = apps.find((app) => app?.id === id)
       if (app) {
         openMinapp(app, keepAlive)
       }

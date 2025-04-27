@@ -8,6 +8,8 @@ on:
 
 jobs:
   build:
+    # Only run on the original repository, not on forks
+    if: github.repository_owner == 'CherryHQ'
     runs-on: ubuntu-latest
 
     steps:

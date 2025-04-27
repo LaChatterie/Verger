@@ -151,6 +151,8 @@ const PopupContainer: React.FC<Props> = ({ title, resolve }) => {
       afterOpenChange={(visible) => visible && nameInputRef.current?.focus()}
       destroyOnClose
       centered
+      okText={t('common.confirm')}
+      cancelText={t('common.cancel')}
       okButtonProps={{ loading }}>
       <Form form={form} layout="vertical">
         <Form.Item

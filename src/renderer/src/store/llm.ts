@@ -1,4 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import {
+  CUSTOM_DEFAULT_MODEL,
+  CUSTOM_INITIAL_PROVIDERS,
+  CUSTOM_TOPIC_NAMING_MODEL,
+  CUSTOM_TRANSLATE_MODEL
+} from '@renderer/config/custom-config'
 import { isLocalAi } from '@renderer/config/env'
 import { SYSTEM_MODELS } from '@renderer/config/models'
 import { Model, Provider } from '@renderer/types'
@@ -25,7 +31,8 @@ export interface LlmState {
   settings: LlmSettings
 }
 
-export const INITIAL_PROVIDERS: Provider[] = [
+// Original providers definition
+const DEFAULT_INITIAL_PROVIDERS: Provider[] = [
   {
     id: 'silicon',
     name: 'Silicon',
@@ -480,7 +487,36 @@ export const INITIAL_PROVIDERS: Provider[] = [
   }
 ]
 
-const initialState: LlmState = {
+// Function to merge custom providers with default providers
+// Custom providers come first, followed by remaining default providers in alphabetical order
+// Default providers are always disabled by default when added to the merged list
+const mergeProviders = (customProviders: Provider[] | undefined, defaultProviders: Provider[]): Provider[] => {
+  if (!customProviders || customProviders.length === 0) {
+    return defaultProviders
+  }
+
+  // Get the IDs of custom providers
+  const customProviderIds = customProviders.map((provider) => provider.id)
+
+  // Filter out default providers that are already in custom providers
+  const remainingDefaultProviders = defaultProviders.filter((provider) => !customProviderIds.includes(provider.id))
+
+  // Sort remaining default providers alphabetically by name
+  // Also set enabled to false for all default providers that are being added
+  const sortedRemainingProviders = [...remainingDefaultProviders]
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .map((provider) => {
+      return { ...provider, enabled: false }
+    })
+
+  return [...customProviders, ...sortedRemainingProviders]
+}
+
+// Export merged providers with custom providers first
+export const INITIAL_PROVIDERS = mergeProviders(CUSTOM_INITIAL_PROVIDERS, DEFAULT_INITIAL_PROVIDERS)
+
+// Original initial state definition
+const DEFAULT_INITIAL_STATE: LlmState = {
   defaultModel: SYSTEM_MODELS.silicon[1],
   topicNamingModel: SYSTEM_MODELS.silicon[2],
   translateModel: SYSTEM_MODELS.silicon[3],
@@ -496,6 +532,19 @@ const initialState: LlmState = {
       keepAliveTime: 0
     }
   }
+}
+
+// Override specific models from custom configuration
+const modelOverrides = {
+  defaultModel: CUSTOM_DEFAULT_MODEL || DEFAULT_INITIAL_STATE.defaultModel,
+  topicNamingModel: CUSTOM_TOPIC_NAMING_MODEL || DEFAULT_INITIAL_STATE.topicNamingModel,
+  translateModel: CUSTOM_TRANSLATE_MODEL || DEFAULT_INITIAL_STATE.translateModel
+}
+
+// Export with potential override from custom configuration
+const initialState: LlmState = {
+  ...DEFAULT_INITIAL_STATE,
+  ...modelOverrides
 }
 
 const getIntegratedInitialState = () => {

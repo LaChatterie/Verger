@@ -36,7 +36,22 @@ const TopViewContainer: React.FC<Props> = ({ children }) => {
 
   useEffect(() => {
     window.message = messageApi
-    window.modal = modal
+
+    // Create a wrapper for modal methods to add translations
+    const modalWithTranslations = {
+      ...modal,
+      confirm: (props) => {
+        // Add translated button text if not provided
+        const translatedProps = {
+          ...props,
+          okText: props.okText || window.i18next?.t('common.confirm'),
+          cancelText: props.cancelText || window.i18next?.t('common.cancel')
+        }
+        return modal.confirm(translatedProps)
+      }
+    }
+
+    window.modal = modalWithTranslations
   }, [messageApi, modal])
 
   onPop = () => {

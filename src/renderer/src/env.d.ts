@@ -3,6 +3,7 @@
 import type KeyvStorage from '@kangfenmao/keyv-storage'
 import { MessageInstance } from 'antd/es/message/interface'
 import { HookAPI } from 'antd/es/modal/useModal'
+import { i18n } from 'i18next'
 import { NavigateFunction } from 'react-router-dom'
 
 interface ImportMetaEnv {
@@ -22,5 +23,6 @@ declare global {
     mermaid: any
     store: any
     navigate: NavigateFunction
+    i18next: i18n
   }
 }

@@ -8,7 +8,6 @@ import { useRuntime } from '@renderer/hooks/useRuntime'
 import { useSettings } from '@renderer/hooks/useSettings'
 import { useAppDispatch } from '@renderer/store'
 import { setUpdateState } from '@renderer/store/runtime'
-import { ThemeMode } from '@renderer/types'
 import { compareVersions, runAsyncFunction } from '@renderer/utils'
 import { Avatar, Button, Progress, Row, Switch, Tag } from 'antd'
 import { debounce } from 'lodash'
@@ -61,7 +60,7 @@ const AboutSettings: FC = () => {
   }
 
   const mailto = async () => {
-    const email = 'support@cherry-ai.com'
+    const email = 'your.email@example.com'
     const subject = `${APP_NAME} Feedback`
     const version = (await window.api.getAppInfo()).version
     const platform = window.electron.process.platform
@@ -72,21 +71,15 @@ const AboutSettings: FC = () => {
   const showLicense = async () => {
     const { appPath } = await window.api.getAppInfo()
     openMinapp({
-      id: 'cherrystudio-license',
+      id: 'verger-license',
       name: t('settings.about.license.title'),
-      url: `file://${appPath}/resources/cherry-studio/license.html`,
+      url: `file://${appPath}/resources/verger/license.html`,
       logo: AppLogo
     })
   }
 
-  const showReleases = async () => {
-    const { appPath } = await window.api.getAppInfo()
-    openMinapp({
-      id: 'cherrystudio-releases',
-      name: t('settings.about.releases.title'),
-      url: `file://${appPath}/resources/cherry-studio/releases.html?theme=${theme === ThemeMode.dark ? 'dark' : 'light'}`,
-      logo: AppLogo
-    })
+  const showReleases = () => {
+    onOpenWebsite('https://github.com/LeChatterie/Verger/releases')
   }
 
   const hasNewVersion = update?.info?.version && version ? compareVersions(update.info.version, version) > 0 : false
@@ -105,7 +98,7 @@ const AboutSettings: FC = () => {
         <SettingTitle>
           {t('settings.about.title')}
           <HStack alignItems="center">
-            <Link to="https://github.com/CherryHQ/cherry-studio">
+            <Link to="https://github.com/LeChatterie/Verger">
               <GithubOutlined style={{ marginRight: 4, color: 'var(--color-text)', fontSize: 20 }} />
             </Link>
           </HStack>
@@ -113,7 +106,7 @@ const AboutSettings: FC = () => {
         <SettingDivider />
         <AboutHeader>
           <Row align="middle">
-            <AvatarWrapper onClick={() => onOpenWebsite('https://github.com/CherryHQ/cherry-studio')}>
+            <AvatarWrapper onClick={() => onOpenWebsite('https://github.com/LeChatterie/Verger')}>
               {update.downloadProgress > 0 && (
                 <ProgressCircle
                   type="circle"
@@ -130,7 +123,7 @@ const AboutSettings: FC = () => {
               <Title>{APP_NAME}</Title>
               <Description>{t('settings.about.description')}</Description>
               <Tag
-                onClick={() => onOpenWebsite('https://github.com/CherryHQ/cherry-studio/releases')}
+                onClick={() => onOpenWebsite('https://github.com/LeChatterie/Verger/releases')}
                 color="cyan"
                 style={{ marginTop: 8, cursor: 'pointer' }}>
                 v{version}
@@ -191,7 +184,9 @@ const AboutSettings: FC = () => {
             <Globe size={18} />
             {t('settings.about.website.title')}
           </SettingRowTitle>
-          <Button onClick={() => onOpenWebsite('https://cherry-ai.com')}>{t('settings.about.website.button')}</Button>
+          <Button onClick={() => onOpenWebsite('https://github.com/LeChatterie/Verger')}>
+            {t('settings.about.website.button')}
+          </Button>
         </SettingRow>
         <SettingDivider />
         <SettingRow>
@@ -199,7 +194,7 @@ const AboutSettings: FC = () => {
             <Github size={18} />
             {t('settings.about.feedback.title')}
           </SettingRowTitle>
-          <Button onClick={() => onOpenWebsite('https://github.com/CherryHQ/cherry-studio/issues/new/choose')}>
+          <Button onClick={() => onOpenWebsite('https://github.com/LeChatterie/Verger/issues/new/choose')}>
             {t('settings.about.feedback.button')}
           </Button>
         </SettingRow>

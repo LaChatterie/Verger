@@ -30,7 +30,7 @@ if (!app.requestSingleInstanceLock()) {
 
   app.whenReady().then(async () => {
     // Set app user model id for windows
-    electronApp.setAppUserModelId(import.meta.env.VITE_MAIN_BUNDLE_ID || 'com.kangfenmao.CherryStudio')
+    electronApp.setAppUserModelId(import.meta.env.VITE_MAIN_BUNDLE_ID || 'com.wordwebsoftware.verger')
 
     // Mac: Hide dock icon before window creation when launch to tray is set
     const isLaunchToTray = configManager.getLaunchToTray()
@@ -89,7 +89,7 @@ if (!app.requestSingleInstanceLock()) {
 
     // Protocol handler for Windows/Linux
     // The commandLine is an array of strings where the last item might be the URL
-    const url = argv.find((arg) => arg.startsWith(CHERRY_STUDIO_PROTOCOL + '://'))
+    const url = argv.find((arg) => arg.startsWith(CHERRY_STUDIO_PROTOCOL + '://') || arg.startsWith('verger://'))
     if (url) handleProtocolUrl(url)
   })
 
