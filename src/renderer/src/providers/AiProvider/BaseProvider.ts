@@ -70,7 +70,7 @@ export default abstract class BaseProvider {
 
   public defaultHeaders() {
     return {
-      'HTTP-Referer': 'https://github.com/LeChatterie/Verger',
+      'HTTP-Referer': 'https://github.com/LaChatterie/Verger',
       'X-Title': 'Verger',
       'X-Api-Key': this.apiKey
     }

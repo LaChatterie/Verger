@@ -30,7 +30,7 @@ if (!app.requestSingleInstanceLock()) {
 
   app.whenReady().then(async () => {
     // Set app user model id for windows
-    electronApp.setAppUserModelId(import.meta.env.VITE_MAIN_BUNDLE_ID || 'com.wordwebsoftware.verger')
+    electronApp.setAppUserModelId(import.meta.env.VITE_MAIN_BUNDLE_ID || 'com.lachatterie.verger')
 
     // Mac: Hide dock icon before window creation when launch to tray is set
     const isLaunchToTray = configManager.getLaunchToTray()

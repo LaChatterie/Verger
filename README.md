@@ -1,13 +1,13 @@
 <h1 align="center">
-  <img src="https://raw.githubusercontent.com/LeChatterie/Verger/refs/heads/master/build/icon.png" width="150" height="150" alt="banner" /><br>
+  <img src="https://raw.githubusercontent.com/LaChatterie/Verger/refs/heads/master/build/icon.png" width="150" height="150" alt="banner" /><br>
   AI Verger
 </h1>
 
 <p align="center">Free desktop AI chat that supports multiple LLM providers</p>
 
 <p align="center">
-  <a href="https://github.com/LeChatterie/Verger/releases/latest">
-    <img src="https://img.shields.io/github/v/release/LeChatterie/Verger?style=flat-square" alt="Latest Release">
+  <a href="https://github.com/LaChatterie/Verger/releases/latest">
+    <img src="https://img.shields.io/github/v/release/LaChatterie/Verger?style=flat-square" alt="Latest Release">
   </a>
 </p>
 

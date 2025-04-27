@@ -1,4 +1,4 @@
-appId: com.lechatterie.verger
+appId: com.lachatterie.verger
 productName: Verger
 electronLanguages:
   - zh-CN
@@ -82,7 +82,7 @@ linux:
     - x-scheme-handler/verger
 publish:
   provider: github
-  owner: LeChatterie
+  owner: LaChatterie
   repo: Verger
 electronDownload:
   mirror: https://npmmirror.com/mirrors/electron/

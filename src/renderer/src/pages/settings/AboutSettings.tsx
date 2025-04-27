@@ -79,7 +79,7 @@ const AboutSettings: FC = () => {
   }
 
   const showReleases = () => {
-    onOpenWebsite('https://github.com/LeChatterie/Verger/releases')
+    onOpenWebsite('https://github.com/LaChatterie/Verger/releases')
   }
 
   const hasNewVersion = update?.info?.version && version ? compareVersions(update.info.version, version) > 0 : false
@@ -98,7 +98,7 @@ const AboutSettings: FC = () => {
         <SettingTitle>
           {t('settings.about.title')}
           <HStack alignItems="center">
-            <Link to="https://github.com/LeChatterie/Verger">
+            <Link to="https://github.com/LaChatterie/Verger">
               <GithubOutlined style={{ marginRight: 4, color: 'var(--color-text)', fontSize: 20 }} />
             </Link>
           </HStack>
@@ -106,7 +106,7 @@ const AboutSettings: FC = () => {
         <SettingDivider />
         <AboutHeader>
           <Row align="middle">
-            <AvatarWrapper onClick={() => onOpenWebsite('https://github.com/LeChatterie/Verger')}>
+            <AvatarWrapper onClick={() => onOpenWebsite('https://github.com/LaChatterie/Verger')}>
               {update.downloadProgress > 0 && (
                 <ProgressCircle
                   type="circle"
@@ -123,7 +123,7 @@ const AboutSettings: FC = () => {
               <Title>{APP_NAME}</Title>
               <Description>{t('settings.about.description')}</Description>
               <Tag
-                onClick={() => onOpenWebsite('https://github.com/LeChatterie/Verger/releases')}
+                onClick={() => onOpenWebsite('https://github.com/LaChatterie/Verger/releases')}
                 color="cyan"
                 style={{ marginTop: 8, cursor: 'pointer' }}>
                 v{version}
@@ -184,7 +184,7 @@ const AboutSettings: FC = () => {
             <Globe size={18} />
             {t('settings.about.website.title')}
           </SettingRowTitle>
-          <Button onClick={() => onOpenWebsite('https://github.com/LeChatterie/Verger')}>
+          <Button onClick={() => onOpenWebsite('https://github.com/LaChatterie/Verger')}>
             {t('settings.about.website.button')}
           </Button>
         </SettingRow>
@@ -194,7 +194,7 @@ const AboutSettings: FC = () => {
             <Github size={18} />
             {t('settings.about.feedback.title')}
           </SettingRowTitle>
-          <Button onClick={() => onOpenWebsite('https://github.com/LeChatterie/Verger/issues/new/choose')}>
+          <Button onClick={() => onOpenWebsite('https://github.com/LaChatterie/Verger/issues/new/choose')}>
             {t('settings.about.feedback.button')}
           </Button>
         </SettingRow>
