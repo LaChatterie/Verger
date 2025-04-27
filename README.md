@@ -11,11 +11,6 @@
   </a>
 </p>
 
-## Enhancements
-
-- **Optimized Defaults**: Pre-configured for best uncensored models, longer default context
-- **English Interface**: All default content in English
-
 # 🌟 Key Features
 
 Avoid vendor lockin by switching between different AI models and providers in a single click, and only pay for what you use.
@@ -102,6 +97,9 @@ To start chatting with AI models, you'll need to obtain API keys from one or mor
 # 🖥️ Development
 
 Verger is a fork of [Cherry Studio](https://github.com/CherryHQ/cherry-studio) that maintains the core functionality while adding custom configuration options and optimized default settings. For more detailed information, see the [VERGER-README.md](VERGER-README.md) file.
+
+- **Optimized Defaults**: Pre-configured for best uncensored models, longer default context
+- **English Interface**: All default content in English
 
 # 📃 Licensing
 

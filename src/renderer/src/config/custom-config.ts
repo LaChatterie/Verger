@@ -193,24 +193,24 @@ export const CUSTOM_SYSTEM_MODELS: Record<string, Model[]> = {
 export const CUSTOM_DEFAULT_MODEL: Model = {
   id: 'google/gemini-2.5-flash-preview',
   provider: 'openrouter',
-  name: 'Google: Gemini 2.5 Flash Preview',
-  group: 'Gemini 2.5'
+  name: 'Gemini 2.5 Flash',
+  group: 'google'
 }
 
 // Custom topic naming model
 export const CUSTOM_TOPIC_NAMING_MODEL: Model = {
   id: 'google/gemini-2.5-flash-preview',
   provider: 'openrouter',
-  name: 'Google: Gemini 2.5 Flash Preview',
-  group: 'Gemini 2.5'
+  name: 'Google: Gemini 2.5 Flash',
+  group: 'google'
 }
 
 // Custom translate model
 export const CUSTOM_TRANSLATE_MODEL: Model = {
   id: 'google/gemini-2.5-flash-preview',
   provider: 'openrouter',
-  name: 'Google: Gemini 2.5 Flash Preview',
-  group: 'Gemini 2.5'
+  name: 'Gemini 2.5 Flash',
+  group: 'google'
 }
 
 // Custom initial providers
