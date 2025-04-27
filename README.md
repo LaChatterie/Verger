@@ -14,9 +14,11 @@
 ## Enhancements
 
 - **Optimized Defaults**: Pre-configured for best uncensored models, longer default context
-- **English-Only Interface**: All default content in English
+- **English Interface**: All default content in English
 
 # 🌟 Key Features
+
+Avoid vendor lockin by switching between different AI models and providers in a single click, and only pay for what you use.
 
 1. **Diverse LLM Provider Support**:
 
@@ -77,6 +79,25 @@ Click one of the download buttons above to visit the latest release page, where 
 - **Windows**: Windows 10 or later (64-bit)
 - **macOS**: macOS 10.15 or later (Intel or Apple Silicon)
 - **Linux**: Ubuntu 20.04 or later (or equivalent)
+
+# 🔑 Getting Started with API Keys
+
+To start chatting with AI models, you'll need to obtain API keys from one or more of the following providers:
+
+## Popular AI Providers:
+
+- **OpenRouter** (https://openrouter.ai/): Provides access to many different models including Claude, Gemini, Mistral, Deepseek and more with a single API key
+- **Google Gemini** (https://ai.google.dev/): Access to Google's Gemini models
+- **Anthropic Claude** (https://claude.ai/): Direct access to Claude models
+- **OpenAI** (https://platform.openai.com/): Access to GPT models
+- **Mistral AI** (https://mistral.ai/): Access to Mistral's models
+
+## Setting Up Your API Keys:
+
+1. Create an account with your preferred provider(s)
+2. Generate an API key from your account dashboard
+3. In Verger, go to Settings > Providers
+4. Add your API key to the corresponding provider
 
 # 🖥️ Development
 
