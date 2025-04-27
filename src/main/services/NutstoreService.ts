@@ -33,7 +33,7 @@ interface WebDAVResponse {
 
 export async function getNutstoreSSOUrl() {
   const url = await createOAuthUrl({
-    app: 'cherrystudio'
+    app: 'verger'
   })
   return url
 }

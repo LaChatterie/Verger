@@ -49,7 +49,7 @@
 
 # 🖥️ Development
 
-Verger is a fork of [Cherry Studio](https://github.com/CherryHQ/cherry-studio) that maintains the core functionality while adding custom configuration options and optimized default settings. For more detailed information, see [VERGER-README.md](VERGER-README.md).
+Verger is a fork of [Cherry Studio](https://github.com/CherryHQ/cherry-studio) that maintains the core functionality while adding custom configuration options and optimized default settings. For more detailed information, see the [VERGER-README.md](VERGER-README.md) file.
 
 # 📃 License
 

@@ -355,6 +355,7 @@
       "delete.title": "Delete File",
       "document": "Document",
       "edit": "Edit",
+      "empty": "No files found",
       "file": "File",
       "image": "Image",
       "name": "Name",

@@ -5,4 +5,7 @@
 .github/workflows/nightly-build.yml merge=ours
 README.md merge=ours
 LICENSE merge=ours
-
+docs/README.ja.md merge=ours
+docs/README.zh.md merge=ours
+docs/CONTRIBUTING.zh.md merge=ours
+resources/data/agents.json merge=ours

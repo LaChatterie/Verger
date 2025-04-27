@@ -303,6 +303,7 @@
       "delete.title": "Supprimer le fichier",
       "document": "Document",
       "edit": "Éditer",
+      "empty": "Aucun fichier trouvé",
       "file": "Fichier",
       "image": "Image",
       "name": "Nom du fichier",
