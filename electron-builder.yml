@@ -30,7 +30,8 @@ files:
   - '!**/*.min.*.map'
   - '!**/*.d.ts'
   - '!**/{.DS_Store,Thumbs.db}'
-  - '!**/{LICENSE,LICENSE.txt,LICENSE-MIT.txt,*.LICENSE.txt,NOTICE.txt,README.md,CHANGELOG.md}'
+  - '!**/{LICENSE-MIT.txt,*.LICENSE.txt,NOTICE.txt,README.md,CHANGELOG.md}'
+  # Include our main LICENSE file for AGPL3 compliance
   - '!node_modules/rollup-plugin-visualizer'
   - '!node_modules/js-tiktoken'
   - '!node_modules/@tavily/core/node_modules/js-tiktoken'
