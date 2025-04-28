@@ -1,6 +1,6 @@
 {
   "name": "Verger",
-  "version": "1.2.9.1",
+  "version": "1.2.9",
   "private": true,
   "description": "A multi-model customizable AI chat assistant.",
   "main": "./out/main/index.js",
