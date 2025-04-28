@@ -267,7 +267,12 @@ class FileStorage {
     const fileName = `${uuidv4()}.png`
     const filePath = path.join(this.storageDir, fileName)
     const data = Buffer.from(bytes, 'base64')
-    await fs.promises.writeFile(filePath, data)
+    try {
+      await fs.promises.writeFile(filePath, data)
+    } catch (error: any) {
+      logger.error(`Error writing file at ${filePath}:`, error)
+      throw new Error(`Error writing file at ${filePath}: ${error.message}`)
+    }
     return {
       id: uuidv4(),
       origin_name: fileName,

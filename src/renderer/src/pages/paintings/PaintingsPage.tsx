@@ -24,7 +24,7 @@ import { translateText } from '@renderer/services/TranslateService'
 import { useAppDispatch } from '@renderer/store'
 import { DEFAULT_PAINTING } from '@renderer/store/paintings'
 import { setGenerating } from '@renderer/store/runtime'
-import type { FileType, Painting } from '@renderer/types'
+import type { FileType, Painting, Provider } from '@renderer/types'
 import { getErrorMessage } from '@renderer/utils'
 import { Button, Cascader, Input, InputNumber, Radio, Slider, Switch, Tooltip } from 'antd'
 import TextArea from 'antd/es/input/TextArea'
@@ -136,35 +136,29 @@ const PaintingsPage: FC = () => {
 
     const selectedProvider = availableProviders.find((p) => p.id === painting.provider)
 
-    if (!selectedProvider) {
-      window.modal.error({
-        content: t('error.provider_not_found'),
-        centered: true
-      })
-      return
+    const validateProvider = (provider: Provider, t: (key: string) => string): boolean => {
+      if (!provider) {
+        window.modal.error({ content: t('error.provider_not_found'), centered: true })
+        return false
+      }
+      if (!provider.enabled) {
+        window.modal.error({ content: t('error.provider_disabled'), centered: true })
+        return false
+      }
+      if (!provider.apiKey) {
+        window.modal.error({ content: t('error.no_api_key'), centered: true })
+        return false
+      }
+      return true
     }
 
-    if (!selectedProvider.enabled) {
-      window.modal.error({
-        content: t('error.provider_disabled'),
-        centered: true
-      })
-      return
-    }
-
-    if (!selectedProvider.apiKey) {
-      window.modal.error({
-        content: t('error.no_api_key'),
-        centered: true
-      })
-      return
-    }
+    if (!validateProvider(selectedProvider!, t)) return
 
     const controller = new AbortController()
     setAbortController(controller)
     setIsLoading(true)
     dispatch(setGenerating(true))
-    const AI = new AiProvider(selectedProvider)
+    const AI = new AiProvider(selectedProvider!)
 
     if (!painting.model) {
       return
