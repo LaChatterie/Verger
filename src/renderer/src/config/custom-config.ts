@@ -9,7 +9,7 @@ import { Model, Provider } from '@renderer/types'
 export const CUSTOM_SYSTEM_MODELS: Record<string, Model[]> = {
   openai: [
     {
-      id: 'gpt-4o-latest',
+      id: 'chatgpt-4o-latest',
       provider: 'openai',
       name: 'ChatGPT 4o',
       group: 'GPT 4o'
