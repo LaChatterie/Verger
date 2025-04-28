@@ -2162,8 +2162,7 @@ export const GENERATE_IMAGE_MODELS = [
   'grok-2-image',
   'grok-2-image-latest',
   'gpt-4o-image',
-  'gpt-image-1',
-  'imagen-3.0-generate-002'
+  'gpt-image-1'
 ]
 
 export const GEMINI_SEARCH_MODELS = [
