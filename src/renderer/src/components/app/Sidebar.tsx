@@ -151,7 +151,7 @@ const MainMenus: FC = () => {
   }
 
   // Filter out paintings icon if Silicon provider is not enabled
-  const visibleIcons = sidebarIcons.visible.filter((icon) => icon !== 'paintings' || isSiliconEnabled)
+  const visibleIcons = sidebarIcons.visible.filter((icon) => icon !== 'paintings' || isSiliconEnabled || true)
 
   return visibleIcons.map((icon) => {
     const path = pathMap[icon]

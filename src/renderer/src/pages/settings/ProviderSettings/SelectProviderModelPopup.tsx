@@ -47,6 +47,8 @@ const PopupContainer: React.FC<Props> = ({ provider, resolve, reject }) => {
       onOk={onOk}
       onCancel={onCancel}
       afterClose={onClose}
+      okText={i18n.t('common.confirm')}
+      cancelText={i18n.t('common.cancel')}
       transitionName="animation-move-down"
       width={300}
       centered>
