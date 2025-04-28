@@ -59,7 +59,7 @@ portable:
   artifactName: ${productName}-${version}-${arch}-portable.${ext}
 mac:
   entitlementsInherit: build/entitlements.mac.plist
-  notarize: false
+  notarize: true
   artifactName: ${productName}-${version}-${arch}.${ext}
   extendInfo:
     - NSCameraUsageDescription: Application requests access to the device's camera.
@@ -92,8 +92,5 @@ artifactBuildCompleted: scripts/artifact-build-completed.js
 releaseInfo:
   releaseNotes: |
     Initial release of Verger, a customized fork of Cherry Studio
-    - Custom configuration system for easy customization
-    - Default configuration optimized for OpenAI and Gemini models
-    - English-only interface and prompts
-    - Disabled Sentry error reporting for improved privacy
-    - Streamlined build process with custom scripts
+    - Default configuration optimized for best uncensored models
+    - English interface and prompts

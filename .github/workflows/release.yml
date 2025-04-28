@@ -147,7 +147,7 @@ jobs:
       - name: Release
         uses: ncipollo/release-action@v1
         with:
-          draft: false
+          draft: true
           allowUpdates: true
           makeLatest: false
           tag: ${{ steps.get-tag.outputs.tag }}
