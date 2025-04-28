@@ -63,13 +63,13 @@ export const CUSTOM_SYSTEM_MODELS: Record<string, Model[]> = {
   ],
   gemini: [
     {
-      id: 'gemini-2.5-flash-preview',
+      id: 'gemini-2.5-flash-preview-04-17',
       provider: 'gemini',
       name: 'Gemini 2.5 Flash',
       group: 'Gemini 2.5'
     },
     {
-      id: 'gemini-2.5-pro-preview',
+      id: 'gemini-2.5-pro-preview-03-25',
       name: 'Gemini 2.5 Pro',
       provider: 'gemini',
       group: 'Gemini 2.5'
@@ -111,13 +111,13 @@ export const CUSTOM_SYSTEM_MODELS: Record<string, Model[]> = {
   ],
   openrouter: [
     {
-      id: 'google/gemini-2.5-flash-preview',
+      id: 'google/gemini-2.5-flash-preview-04-17',
       provider: 'openrouter',
       name: 'Gemini 2.5 Flash',
       group: 'google'
     },
     {
-      id: 'google/gemini-2.5-pro-preview',
+      id: 'google/gemini-2.5-pro-preview-03-25',
       provider: 'openrouter',
       name: 'Gemini 2.5 Pro',
       group: 'google'
@@ -191,7 +191,7 @@ export const CUSTOM_SYSTEM_MODELS: Record<string, Model[]> = {
 
 // Custom default model
 export const CUSTOM_DEFAULT_MODEL: Model = {
-  id: 'google/gemini-2.5-flash-preview',
+  id: 'google/gemini-2.5-flash-preview-04-17',
   provider: 'openrouter',
   name: 'Gemini 2.5 Flash',
   group: 'google'
@@ -199,7 +199,7 @@ export const CUSTOM_DEFAULT_MODEL: Model = {
 
 // Custom topic naming model
 export const CUSTOM_TOPIC_NAMING_MODEL: Model = {
-  id: 'google/gemini-2.5-flash-preview',
+  id: 'google/gemini-2.5-flash-preview-04-17',
   provider: 'openrouter',
   name: 'Google: Gemini 2.5 Flash',
   group: 'google'
@@ -207,7 +207,7 @@ export const CUSTOM_TOPIC_NAMING_MODEL: Model = {
 
 // Custom translate model
 export const CUSTOM_TRANSLATE_MODEL: Model = {
-  id: 'google/gemini-2.5-flash-preview',
+  id: 'google/gemini-2.5-flash-preview-04-17',
   provider: 'openrouter',
   name: 'Gemini 2.5 Flash',
   group: 'google'

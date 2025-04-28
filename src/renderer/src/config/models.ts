@@ -1663,7 +1663,7 @@ const DEFAULT_SYSTEM_MODELS: Record<string, Model[]> = {
   ],
   openrouter: [
     {
-      id: 'google/gemini-2.5-flash-preview',
+      id: 'google/gemini-2.5-flash-preview-04-17',
       provider: 'openrouter',
       name: 'Google: Gemini 2.5 Flash Preview',
       group: 'google'
