@@ -1,5 +1,5 @@
 import { isMac } from '@renderer/config/constant'
-import { AppLogo, UserAvatar } from '@renderer/config/env'
+import { UserAvatar } from '@renderer/config/env'
 import { useTheme } from '@renderer/context/ThemeProvider'
 import useAvatar from '@renderer/hooks/useAvatar'
 import { useMinappPopup } from '@renderer/hooks/useMinappPopup'
@@ -11,7 +11,6 @@ import { isEmoji } from '@renderer/utils'
 import type { MenuProps } from 'antd'
 import { Avatar, Dropdown, Tooltip } from 'antd'
 import {
-  CircleHelp,
   FileSearch,
   Folder,
   Languages,
@@ -34,8 +33,8 @@ import MinAppIcon from '../Icons/MinAppIcon'
 import UserPopup from '../Popups/UserPopup'
 
 const Sidebar: FC = () => {
-  const { hideMinappPopup, openMinapp } = useMinappPopup()
-  const { minappShow, currentMinappId } = useRuntime()
+  const { hideMinappPopup } = useMinappPopup()
+  const { minappShow } = useRuntime()
   const { sidebarIcons } = useSettings()
   const { pinned } = useMinapps()
 
@@ -57,15 +56,7 @@ const Sidebar: FC = () => {
     navigate(path)
   }
 
-  const docsId = 'cherrystudio-docs'
-  const onOpenDocs = () => {
-    openMinapp({
-      id: docsId,
-      name: t('docs.title'),
-      url: 'https://docs.cherry-ai.com/',
-      logo: AppLogo
-    })
-  }
+  // Docs functionality removed
 
   return (
     <Container id="app-sidebar" style={{ backgroundColor, zIndex: minappShow ? 10000 : 'initial' }}>
@@ -89,11 +80,7 @@ const Sidebar: FC = () => {
         )}
       </MainMenusContainer>
       <Menus>
-        <Tooltip title={t('docs.title')} mouseEnterDelay={0.8} placement="right">
-          <Icon theme={theme} onClick={onOpenDocs} className={minappShow && currentMinappId === docsId ? 'active' : ''}>
-            <CircleHelp size={20} className="icon" />
-          </Icon>
-        </Tooltip>
+        {/* Docs icon hidden */}
         <Tooltip
           title={t('settings.theme.title') + ': ' + t(`settings.theme.${settingTheme}`)}
           mouseEnterDelay={0.8}

@@ -70,8 +70,8 @@ export default abstract class BaseProvider {
 
   public defaultHeaders() {
     return {
-      'HTTP-Referer': 'https://cherry-ai.com',
-      'X-Title': 'Cherry Studio',
+      'HTTP-Referer': 'https://github.com/LaChatterie/Verger',
+      'X-Title': 'Verger',
       'X-Api-Key': this.apiKey
     }
   }

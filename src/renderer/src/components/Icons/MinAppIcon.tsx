@@ -1,4 +1,4 @@
-import { DEFAULT_MIN_APPS } from '@renderer/config/minapps'
+import { getCombinedMinApps } from '@renderer/store/minapps'
 import { MinAppType } from '@renderer/types'
 import { FC } from 'react'
 import styled from 'styled-components'
@@ -11,7 +11,9 @@ interface Props {
 }
 
 const MinAppIcon: FC<Props> = ({ app, size = 48, style, sidebar = false }) => {
-  const _app = DEFAULT_MIN_APPS.find((item) => item.id === app.id)
+  // Use the combined list of apps
+  const ALL_APPS = getCombinedMinApps()
+  const _app = ALL_APPS.find((item) => item.id === app.id)
 
   if (!_app) {
     return null

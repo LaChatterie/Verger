@@ -40,7 +40,7 @@ const rootReducer = combineReducers({
 
 const persistedReducer = persistReducer(
   {
-    key: 'cherry-studio',
+    key: 'verger',
     storage,
     version: 97,
     blacklist: ['runtime', 'messages'],

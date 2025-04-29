@@ -1,9 +1,9 @@
 import { UndoOutlined } from '@ant-design/icons' // 导入重置图标
-import { DEFAULT_MIN_APPS } from '@renderer/config/minapps'
 import { useTheme } from '@renderer/context/ThemeProvider'
 import { useMinapps } from '@renderer/hooks/useMinapps'
 import { useSettings } from '@renderer/hooks/useSettings'
 import { useAppDispatch } from '@renderer/store'
+import { getCombinedMinApps } from '@renderer/store/minapps'
 import {
   setMaxKeepAliveMinapps,
   setMinappsOpenLinkExternal,
@@ -32,12 +32,15 @@ const MiniAppSettings: FC = () => {
   const [messageApi, contextHolder] = message.useMessage()
   const debounceTimerRef = useRef<NodeJS.Timeout | null>(null)
 
+  // Use the combined list of apps
+  const DEFAULT_APPS = getCombinedMinApps()
+
   const handleResetMinApps = useCallback(() => {
-    setVisibleMiniApps(DEFAULT_MIN_APPS)
+    setVisibleMiniApps(DEFAULT_APPS)
     setDisabledMiniApps([])
-    updateMinapps(DEFAULT_MIN_APPS)
+    updateMinapps(DEFAULT_APPS)
     updateDisabledMinapps([])
-  }, [updateDisabledMinapps, updateMinapps])
+  }, [DEFAULT_APPS, updateDisabledMinapps, updateMinapps])
 
   // 恢复默认缓存数量
   const handleResetCacheLimit = useCallback(() => {

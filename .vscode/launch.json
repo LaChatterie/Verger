@@ -1,4 +1,10 @@
 {
+  // Cherry Studio Debugging Configuration
+  // To debug the application:
+  // 1. Press F5 to start the Main Process debugging
+  // 2. The application will start in development mode
+  // 3. Use the built-in DevTools (Ctrl+Shift+I) for renderer debugging
+  // 4. This approach avoids opening additional browser windows
   "version": "0.2.0",
   "configurations": [
     {
@@ -9,30 +15,46 @@
       "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron-vite",
       "runtimeVersion": "20",
       "windows": {
-        "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron-vite.cmd"
+        "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron.cmd"
       },
-      "runtimeArgs": ["--sourcemap"],
+      "args": ["."],
       "env": {
-        "REMOTE_DEBUGGING_PORT": "9222"
+        "PATH": "C:\\Program Files\\nodejs20;${env:PATH}"
+      },
+      "preLaunchTask": "Start Dev Server",
+      "outputCapture": "std",
+      "console": "integratedTerminal",
+      "autoAttachChildProcesses": true,
+      "internalConsoleOptions": "neverOpen",
+      "skipFiles": ["<node_internals>/**"],
+      "presentation": {
+        "hidden": false,
+        "group": "Debug",
+        "order": 1
+      },
+      "serverReadyAction": {
+        "pattern": "ready|Dev server running at:",
+        "uriFormat": "http://localhost:3000",
+        "action": "debugWithChrome"
       }
     },
     {
-      "name": "Debug Renderer Process",
-      "port": 9222,
-      "request": "attach",
+      "name": "Attach to Renderer",
       "type": "chrome",
-      "webRoot": "${workspaceFolder}/src/renderer",
-      "timeout": 60000,
-      "presentation": {
-        "hidden": true
-      }
+      "request": "attach",
+      "port": 9222,
+      "webRoot": "${workspaceFolder}",
+      "timeout": 30000
     }
   ],
   "compounds": [
     {
       "name": "Debug All",
-      "configurations": ["Debug Main Process", "Debug Renderer Process"],
+      "configurations": ["Debug Main Process", "Attach to Renderer"],
+      "stopAll": true,
       "presentation": {
+        "hidden": false,
+        "group": "Debug",
         "order": 1
       }
     }

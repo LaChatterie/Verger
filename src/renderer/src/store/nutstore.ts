@@ -14,7 +14,7 @@ export interface NutstoreState {
 
 const initialState: NutstoreState = {
   nutstoreToken: '',
-  nutstorePath: '/cherry-studio',
+  nutstorePath: '/verger',
   nutstoreAutoSync: false,
   nutstoreSyncInterval: 0,
   nutstoreSyncState: {

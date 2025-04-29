@@ -94,6 +94,35 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_OPTIONS: --max-old-space-size=8192
 
+      - name: Prepare Windows Certificate
+        if: matrix.os == 'windows-latest'
+        shell: powershell # Use PowerShell for Windows runners
+        run: |
+          # Define the path where the PFX file will be saved on the runner
+          $pfxPath = Join-Path $env:TEMP "certificate.pfx"
+          Write-Host "Saving PFX to: $pfxPath"
+
+          # Get the Base64 string from the secret and decode it
+          $base64Pfx = "${{ secrets.WIN_CSC_FILE }}"
+          $bytes = [System.Convert]::FromBase64String($base64Pfx)
+
+          # Save the decoded bytes to the file
+          [System.IO.File]::WriteAllBytes($pfxPath, $bytes)
+
+          # Verify the file exists (optional)
+          if (Test-Path $pfxPath) {
+              Write-Host "PFX file created successfully."
+          } else {
+              Write-Host "Failed to create PFX file."
+              exit 1 # Fail the step if file creation failed
+          }
+
+          # Set the CSC_LINK environment variable for subsequent steps
+          # $env:GITHUB_ENV is a special file where you write env vars
+          "CSC_LINK=$pfxPath" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+
+          Write-Host "CSC_LINK environment variable set."
+      # --------------------------------------------
       - name: Build Windows
         if: matrix.os == 'windows-latest'
         run: |
@@ -103,13 +132,24 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RENDERER_VITE_AIHUBMIX_SECRET: ${{ vars.RENDERER_VITE_AIHUBMIX_SECRET }}
           NODE_OPTIONS: --max-old-space-size=8192
+          CSC_KEY_PASSWORD: ${{ secrets.WIN_CSC_KEY_PASSWORD }}
+
+      - name: Cleanup Windows Certificate
+        if: always() && matrix.os == 'windows-latest'
+        shell: powershell
+        run: |
+          $pfxPath = Join-Path $env:RUNNER_TEMP "certificate.pfx"
+          if (Test-Path $pfxPath) {
+            Remove-Item -Path $pfxPath -Force
+            Write-Host "Certificate file removed."
+          }
 
       - name: Release
         uses: ncipollo/release-action@v1
         with:
-          draft: true
+          draft: false
           allowUpdates: true
-          makeLatest: false
+          makeLatest: true
           tag: ${{ steps.get-tag.outputs.tag }}
           artifacts: 'dist/*.exe,dist/*.zip,dist/*.dmg,dist/*.AppImage,dist/*.snap,dist/*.deb,dist/*.rpm,dist/*.tar.gz,dist/latest*.yml,dist/*.blockmap'
           token: ${{ secrets.GITHUB_TOKEN }}

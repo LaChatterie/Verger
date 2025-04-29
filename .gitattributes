@@ -1,2 +1,25 @@
 /.yarn/**            linguist-vendored
 /.yarn/releases/*    binary
+
+README.md merge=ours
+LICENSE merge=ours
+docs/README.ja.md merge=ours
+docs/README.zh.md merge=ours
+docs/CONTRIBUTING.zh.md merge=ours
+resources/data/agents.json merge=ours
+resources/cherry-studio/license.html merge=ours
+scripts/cloudflare-worker.js merge=ours
+
+.github/ISSUE_TEMPLATE/0_bug_report.yml merge=ours
+.github/ISSUE_TEMPLATE/#0_bug_report.yml merge=ours
+.github/ISSUE_TEMPLATE/1_feature_request.yml merge=ours
+.github/ISSUE_TEMPLATE/#1_feature_request.yml merge=ours
+.github/ISSUE_TEMPLATE/2_question.yml merge=ours
+.github/ISSUE_TEMPLATE/#2_question.yml merge=ours
+.github/ISSUE_TEMPLATE/3_others.yml merge=ours
+.github/ISSUE_TEMPLATE/#3_others.yml merge=ours
+.github/workflows/nightly-build.yml merge=ours
+.github/workflows/issue-checker.yml merge=ours
+.github/workflows/issue-management.yml merge=ours
+.github/issue-checker.yml merge=ours
+.github/pull_request_template.md merge=ours
