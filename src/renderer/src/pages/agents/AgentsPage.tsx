@@ -7,7 +7,6 @@ import { useAgents } from '@renderer/hooks/useAgents'
 import { createAssistantFromAgent } from '@renderer/services/AssistantService'
 import { Agent } from '@renderer/types'
 import { uuid } from '@renderer/utils'
-import { mapLanguageVariant } from '@renderer/utils/languageMapping'
 import { Button, Empty, Flex, Input } from 'antd'
 import { omit } from 'lodash'
 import { Search } from 'lucide-react'
@@ -107,11 +106,7 @@ const AgentsPage: FC = () => {
   const getLocalizedGroupName = useCallback(
     (group: string) => {
       const currentLang = i18n.language
-      // Map language variants to their base language codes (e.g., "en-GB" to "en-US")
-      const mappedLang = mapLanguageVariant(currentLang)
-
-      // Try to get translation with mapped language, fallback to original language, then to group name
-      return groupTranslations[group]?.[mappedLang] || groupTranslations[group]?.[currentLang] || group
+      return groupTranslations[group]?.[currentLang] || group
     },
     [i18n.language]
   )

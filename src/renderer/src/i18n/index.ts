@@ -1,4 +1,3 @@
-import { mapLanguageVariant } from '@renderer/utils/languageMapping'
 import { defaultLanguage } from '@shared/config/constant'
 import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
@@ -15,7 +14,6 @@ import esES from './translate/es-es.json'
 import frFR from './translate/fr-fr.json'
 import ptPT from './translate/pt-pt.json'
 
-// These should match the SUPPORTED_LANGUAGES array in utils/languageMapping.ts
 const resources = {
   'el-GR': elGR,
   'en-US': enUS,
@@ -29,9 +27,7 @@ const resources = {
 }
 
 export const getLanguage = () => {
-  const language = localStorage.getItem('language') || navigator.language || defaultLanguage
-  // Map language variants (e.g., "en-GB" to "en-US") to supported languages
-  return mapLanguageVariant(language)
+  return localStorage.getItem('language') || navigator.language || defaultLanguage
 }
 
 export const getLanguageCode = () => {
@@ -46,10 +42,5 @@ i18n.use(initReactI18next).init({
     escapeValue: false
   }
 })
-
-// Expose i18next to window for use in modal translations
-if (typeof window !== 'undefined') {
-  window.i18next = i18n
-}
 
 export default i18n
